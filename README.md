@@ -1,4 +1,4 @@
-ZemTv
+XBMC Plugins 
 =====
 
-XBMC Plugin for Zemtv.com
+Place for my plugin developments. 
