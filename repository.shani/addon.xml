@@ -1,13 +1,13 @@
 <?xml version="1.0.1" encoding="UTF-8" standalone="yes"?>
-<addon id="repository.metalkettle" name="MetalKettles Addon Repository" version="1.3" provider-name="MetalKettle">
-	<extension point="xbmc.addon.repository" name="MetalKettles Addon Repository">
-		<info compressed="false">http://github.com/metalkettle/MetalKettles-Addon-Repository/raw/master/addons.xml</info>
-		<checksum>http://github.com/metalkettle/MetalKettles-Addon-Repository/raw/master/addons.xml.md5</checksum>
-		<datadir zip="true">http://github.com/metalkettle/MetalKettles-Addon-Repository/raw/master/zips</datadir>
+<addon id="repository.shani" name="Shanis Addon Repository" version="1.3" provider-name="Shani">
+	<extension point="xbmc.addon.repository" name="Shanis Addon Repository">
+		<info compressed="false">http://github.com/Shani-08/ShaniXBMCWork/raw/master/addons.xml</info>
+		<checksum>http://github.com/Shani-08/ShaniXBMCWork/raw/master/addons.xml.md5</checksum>
+		<datadir zip="true">http://github.com/Shani-08/ShaniXBMCWork/raw/master/zips</datadir>
 	</extension>
 	<extension point="xbmc.addon.metadata">
-		<summary>Install my Addons</summary>
-		<description>Download and install addons from MetalKettle</description>
+		<summary>Addons related to XBMC for Zemtv etc</summary>
+		<description>Go though the plugins and see what you like</description>
 		<platform>all</platform>
 	</extension>
 </addon>
