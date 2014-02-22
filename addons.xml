@@ -2,7 +2,7 @@
 <addons>
 <addon id="plugin.video.ZemTV-shani"
        name="ZemTV-Shani"
-       version="1.0.1"
+       version="1.0.2"
        provider-name="shani">
   <requires>
     <import addon="xbmc.python" version="2.0"/>

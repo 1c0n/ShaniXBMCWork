@@ -10,7 +10,8 @@ __addonname__   = __addon__.getAddonInfo('name')
 __icon__        = __addon__.getAddonInfo('icon')
 addon_id = 'plugin.video.ZemTV-shani'
 selfAddon = xbmcaddon.Addon(id=addon_id)
-
+  
+ 
 mainurl='http://www.zemtv.com/'
 liveURL='http://www.zemtv.com/live-pakistani-news-channels/'
 
