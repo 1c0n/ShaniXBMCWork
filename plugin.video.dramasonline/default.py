@@ -27,10 +27,12 @@ def addLink(name,url,iconimage):
 
 def addDir(name,url,mode,iconimage	,showContext=False):
 #	print name
-	name=name.decode('utf-8','replace')
-	print  name
-	print url
-	print iconimage
+#	name=name.decode('utf-8','replace')
+	h = HTMLParser.HTMLParser()
+	name= h.unescape(name.decode("utf8")).encode("ascii","ignore")
+	#print  name
+	#print url
+	#print iconimage
 	u=sys.argv[0]+"?url="+urllib.quote_plus(url)+"&mode="+str(mode)+"&name="+urllib.quote_plus(name)
 	ok=True
 #	print iconimage
@@ -45,40 +47,6 @@ def addDir(name,url,mode,iconimage	,showContext=False):
 	ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
 	return ok
 	
-def PlayChannel ( channelName ): 
-#	print linkType
-	url = tabURL.replace('%s',channelName);
-	req = urllib2.Request(url)
-	req.add_header('User-Agent', 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.3) Gecko/2008092417 Firefox/3.0.3')
-	response = urllib2.urlopen(req)
-	link=response.read()
-	response.close()
-#	print link
-	
-	match=re.compile('\"(http.*?playlist.m3u.*?)\"').findall(link)
-#	print match
-
-	strval = match[0]
-#	print strval
-	req = urllib2.Request(strval)
-	req.add_header('User-Agent', 'Mozilla/5.0(iPad; U; CPU iPhone OS 3_2 like Mac OS X; en-us) AppleWebKit/531.21.10 (KHTML, like Gecko) Version/4.0.4 Mobile/7B314 Safari/531.21.10')
-	req.add_header('Referer', 'http://www.eboundservices.com:8888/users/rex/m_live.php')
-	response = urllib2.urlopen(req)
-	link=response.read()
-	response.close()
-#	print link
-	match=re.compile('\"(http.*?hashAESkey=.*?)\"').findall(link)
-#	print match
-	strval = match[0]
-
-	listitem = xbmcgui.ListItem(channelName)
-	listitem.setInfo('video', {'Title': channelName, 'Genre': 'Live TV'})
-	playlist = xbmc.PlayList( xbmc.PLAYLIST_VIDEO )
-	playlist.clear()
-	playlist.add (strval)
-
-	xbmc.Player().play(playlist)
-	return
 
 
 def get_params():
@@ -100,29 +68,7 @@ def get_params():
 	return param
 
 
-def DisplayChannelNames(url):
-	req = urllib2.Request(mainurl)
-	req.add_header('User-Agent', 'Mozilla/5.0 (Windows; U; Windows NT 5.1; en-GB; rv:1.9.0.3) Gecko/2008092417 Firefox/3.0.3')
-	response = urllib2.urlopen(req)
-	link=response.read()
-	response.close()
-#	print link
-#	 match=re.compile('<param name="URL" value="(.+?)">').findall(link)
-#	match=re.compile('<a href="(.+?)"').findall(link)
-#	match=re.compile('onclick="playChannel\(\'(.*?)\'\);">(.*?)</a>').findall(link)
-#	match =re.findall('onclick="playChannel\(\'(.*?)\'\);">(.*?)</a>', link, re.DOTALL|re.IGNORECASE)
 
-
-	match =re.findall('onclick="playChannel\(\'(.*?)\'\);".?>(.*?)</a>', link, re.DOTALL|re.IGNORECASE)
-#	print match
-#	print 'val is'
-	match=sorted(match,key=itemgetter(1)   )
-	for cname in match:
-		if cname[0]<>'':
-			addDir(cname[1] ,cname[0] ,1,'')
-		else:
-			addDir('Rex' ,'rex' ,1,'')
-	return
 
 def Addtypes():
 	#2 is series=3 are links
@@ -135,7 +81,7 @@ def Addtypes():
 	addDir('APlus Shows' ,'http://www.dramasonline.com/aplus-entertainment-latest-dramas-episodes-online/' ,2,'')
 	addDir('Teleplays' ,'http://www.dramasonline.com/?cat=255' ,3,'')# these are is links
 	addDir('Top Rated Dramas' ,'http://www.dramasonline.com/' ,5,'') # top 
-	addDir('Live Channels' ,'Live' ,6,'') ##
+	addDir('Live Channels' ,'http://www.dramasonline.com/category/live-channels/' ,6,'') ##
 	return
 
 def AddSeries(Fromurl):
@@ -161,16 +107,14 @@ def AddSeries(Fromurl):
 		optiontype=2
 	match =re.findall(regstring, link, re.M|re.DOTALL)
 	#match=re.compile('<a href="(.*?)"targe.*?<img.*?alt="(.*?)" src="(.*?)"').findall(link)
-	print Fromurl
+	#print Fromurl
 
-#	print match
-	h = HTMLParser.HTMLParser()
 
 	for cname in match:
 		if optiontype==2:
-			addDir(h.unescape(cname[1]) ,cname[0] ,3,cname[2])#url,name,jpg#name,url,mode,icon
+			addDir(cname[1] ,cname[0] ,3,cname[2])#url,name,jpg#name,url,mode,icon
 		else:
-			addDir(h.unescape(cname[0]) ,cname[1] ,3,cname[2])#name,url,img
+			addDir(cname[0] ,cname[1] ,3,cname[2])#name,url,img
 		
 #	<a href="http://www.zemtv.com/page/2/">&gt;</a></li>
 #	match =re.findall('<a href="(.*)">&gt;<\/a><\/li>', link, re.IGNORECASE)
@@ -182,7 +126,7 @@ def AddSeries(Fromurl):
 	return
 
 def TopRatedDramas(Fromurl):
-	print Fromurl
+	#print Fromurl
 	req = urllib2.Request(Fromurl)
 	req.add_header('User-Agent','Mozilla/5.0(iPad; U; CPU iPhone OS 3_2 like Mac OS X; en-us) AppleWebKit/531.21.10 (KHTML, like Gecko) Version/4.0.4 Mobile/7B314 Safari/531.21.10')
 	response = urllib2.urlopen(req)
@@ -206,7 +150,7 @@ def TopRatedDramas(Fromurl):
 	h = HTMLParser.HTMLParser()
 #	print 'match',match
 	for cname in match:
-		addDir(h.unescape(cname[1]) ,cname[0] ,3,'')#url,name,jpg#name,url,mode,icon
+		addDir(cname[1],cname[0] ,3,'')#url,name,jpg#name,url,mode,icon
 		
 #	<a href="http://www.zemtv.com/page/2/">&gt;</a></li>
 #	match =re.findall('<a href="(.*)">&gt;<\/a><\/li>', link, re.IGNORECASE)
@@ -224,7 +168,7 @@ def AddEnteries(Fromurl):
 	response = urllib2.urlopen(req)
 	link=response.read()
 	response.close()
-	print link
+#	print link
 #	print "addshows"
 #	match=re.compile('<param name="URL" value="(.+?)">').findall(link)
 #	match=re.compile('<a href="(.+?)"').findall(link)
@@ -237,11 +181,11 @@ def AddEnteries(Fromurl):
 	match =re.findall('<div class="videopart">\s*<div class="paneleft">\s*<a class="pthumb" href="(.*?)" title="(.*?)".*?img.*?src="(.*?)" class="attachment-index-post-thumbnail wp-post-image"', link, re.M|re.DOTALL)
 #	print Fromurl
 
-	print match
+	#print match
 	h = HTMLParser.HTMLParser()
 
 	for cname in match:
-		addDir(h.unescape(cname[1]) ,cname[0] ,4,cname[2])
+		addDir(cname[1] ,cname[0] ,4,cname[2])
 		
 #	<a href="http://www.zemtv.com/page/2/">&gt;</a></li>
 	match =re.findall('<link rel=\'next\' href=\'(.*?)\' \/>', link, re.IGNORECASE)
@@ -252,7 +196,7 @@ def AddEnteries(Fromurl):
 	
 	return
 	
-def AddChannels():
+def AddChannels(liveURL):
 	req = urllib2.Request(liveURL)
 	req.add_header('User-Agent','Mozilla/5.0(iPad; U; CPU iPhone OS 3_2 like Mac OS X; en-us) AppleWebKit/531.21.10 (KHTML, like Gecko) Version/4.0.4 Mobile/7B314 Safari/531.21.10')
 	response = urllib2.urlopen(req)
@@ -267,12 +211,12 @@ def AddChannels():
 #	match =re.findall('<div class=\"post-title\"><a href=\"(.*?)\".*<b>(.*)<\/b><\/a>', link, re.IGNORECASE)
 #	match =re.findall('<img src="(.*?)" alt=".*".+<\/a>\n*.+<div class="post-title"><a href="(.*?)".*<b>(.*)<\/b>', link, re.UNICODE)
 
-	match =re.findall('<div class="videopart">\s*<div class="paneleft">\s*<a class="pthumb" href="(.*?)" title="(.*?)".*?img.*?src="(.*?)" class="attachment-index-post-thumbnail wp-post-image"', link)
+	match =re.findall('<div class="videopart">\s*<div class="paneleft">\s*<a.*href="(.*?)".*title="(.*?)".*<img.*src="(.*?)"', link,re.M)
 
-#	print match
+	print match
 	h = HTMLParser.HTMLParser()
 	for cname in match:
-		addDir(h.unescape(cname[1]) ,cname[0] ,4,cname[2])		#name,url,mode,icon
+		addDir(cname[1] ,cname[0] ,7,cname[2])		#name,url,mode,icon
 	return	
 	
 
@@ -359,12 +303,11 @@ def PlayLiveLink ( url ):
 	
 #	match =re.findall('<script id.+\s+src="(.*)">',link,  re.IGNORECASE)
 
-	match =re.findall('"htt.*?\?site=(.*?)"',link,  re.IGNORECASE)
+	match =re.findall('"http.*(ebound).*?\?site=(.*?)"',link,  re.IGNORECASE)[0]
 
 
 	print match
-	
-	newURL='http://www.eboundservices.com/iframe/newads/iframe.php?stream='+ match[0]+'&width=undefined&height=undefined&clip=' + match[0]
+	newURL='http://www.eboundservices.com/iframe/newads/iframe.php?stream='+ match[1]+'&width=undefined&height=undefined&clip=' + match[1]
 	print newURL
 
 	
@@ -432,7 +375,7 @@ except:
 	pass
 
 
-#print 	linkType
+print 	mode
 
 if mode==None or url==None or len(url)<1:
 	print "InAddTypes"
@@ -459,9 +402,9 @@ elif mode==5:
 	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 elif mode==6:
 	print "Play url is "+url
-	DisplayChannelNames(url)
+	AddChannels(url)
 	xbmcplugin.endOfDirectory(int(sys.argv[1]))
 elif mode==7:
-	print "Play url is "+url
+	print "Play url is "+url,mode
 	PlayLiveLink(url)
 	
