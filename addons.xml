@@ -19,9 +19,9 @@
   </extension>
 </addon>
 
-<addon id="plugin.video.ZemTV-Shani"
+<addon id="plugin.video.ZemTV-shani"
        name="ZemTV.com"
-       version="1.1.1"
+       version="1.1.2"
        provider-name="shani">
   <requires>
     <import addon="xbmc.python" version="2.0"/>
