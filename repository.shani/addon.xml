@@ -1,5 +1,5 @@
 <?xml version="1.0.1" encoding="UTF-8" standalone="yes"?>
-<addon id="repository.shani" name="Shanis Addon Repository" version="1.4" provider-name="Shani">
+<addon id="repository.shani" name="Shanis Addon Repository" version="1.5" provider-name="Shani">
 	<extension point="xbmc.addon.repository" name="Shanis Addon Repository">
 		<info compressed="false">http://github.com/Shani-08/ShaniXBMCWork/raw/master/addons.xml</info>
 		<checksum>http://github.com/Shani-08/ShaniXBMCWork/raw/master/addons.xml.md5</checksum>

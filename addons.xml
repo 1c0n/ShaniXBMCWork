@@ -2,7 +2,7 @@
 <addons>
 <addon id="plugin.video.dramasonline"
        name="DramasOnline.com"
-       version="1.2.0"
+       version="1.5.0"
        provider-name="shani">
   <requires>
     <import addon="xbmc.python" version="2.0"/>
@@ -21,7 +21,7 @@
 
 <addon id="plugin.video.ZemTV-shani"
        name="ZemTV-Shani"
-       version="1.0.2"
+       version="1.1.0"
        provider-name="shani">
   <requires>
     <import addon="xbmc.python" version="2.0"/>
@@ -38,7 +38,7 @@
   </extension>
 </addon>
 
-<addon id="repository.shani" name="Shanis Addon Repository" version="1.4" provider-name="Shani">
+<addon id="repository.shani" name="Shanis Addon Repository" version="1.5" provider-name="Shani">
 	<extension point="xbmc.addon.repository" name="Shanis Addon Repository">
 		<info compressed="false">http://github.com/Shani-08/ShaniXBMCWork/raw/master/addons.xml</info>
 		<checksum>http://github.com/Shani-08/ShaniXBMCWork/raw/master/addons.xml.md5</checksum>
