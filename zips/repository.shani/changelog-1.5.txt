@@ -1,4 +1,0 @@
-[B]Version 1.0[/B]
-- First version 1
-[B]Version 1.5[/B]
-- Fixed some bugs about folder names and zip files

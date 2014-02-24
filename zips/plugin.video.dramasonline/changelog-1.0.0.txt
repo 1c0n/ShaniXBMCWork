@@ -1,5 +1,0 @@
-[B]Version 1.0[/B]
-- First version 1
-
-[B]Version 1.2[/B]
-- Some bug fixes and beta support for live channels
