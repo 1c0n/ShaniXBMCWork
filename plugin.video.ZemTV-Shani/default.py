@@ -284,6 +284,7 @@ def PlayLiveLink ( url ):
 	print match
 	
 	newURL='http://www.eboundservices.com/iframe/newads/iframe.php?stream='+ match[0]+'&width=undefined&height=undefined&clip=' + match[0]
+	name=match[0];
 	print newURL
 
 	
@@ -311,14 +312,19 @@ def PlayLiveLink ( url ):
 #	print match
 	
 	strval = match[0]
+
+	#listitem = xbmcgui.ListItem(name)
+	#listitem.setInfo('video', {'Title': name, 'Genre': 'Live TV'})
+	#playlist = xbmc.PlayList( xbmc.PLAYLIST_VIDEO )
+	#playlist.clear()
+	#playlist.add (strval)
 	
-	listitem = xbmcgui.ListItem(name)
-	listitem.setInfo('video', {'Title': name, 'Genre': 'Live TV'})
-	playlist = xbmc.PlayList( xbmc.PLAYLIST_VIDEO )
-	playlist.clear()
-	playlist.add (strval)
-	
-	xbmc.Player().play(playlist)
+	#xbmc.Player().play(playlist)
+	listitem = xbmcgui.ListItem( label = str(name), iconImage = "DefaultVideo.png", thumbnailImage = xbmc.getInfoImage( "ListItem.Thumb" ), path=strval )
+	print "playing stream name: " + str(name) 
+	listitem.setInfo( type="video", infoLabels={ "Title": name, "Path" : strval } )
+	#listitem.setInfo( type="video", infoLabels={ "Title": name, "Plot" : name, "TVShowTitle": name } )
+	xbmc.Player( xbmc.PLAYER_CORE_DVDPLAYER ).play( str(strval), listitem)
 	return
 
 

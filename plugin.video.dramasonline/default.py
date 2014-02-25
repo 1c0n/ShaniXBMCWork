@@ -289,6 +289,7 @@ def PlayShowLink ( url ):
 		xbmc.executebuiltin("xbmc.PlayMedia("+uurl+")")
 	
 	return
+	
 
 
 def PlayLiveLink ( url ): 
@@ -308,6 +309,7 @@ def PlayLiveLink ( url ):
 
 	print match
 	newURL='http://www.eboundservices.com/iframe/newads/iframe.php?stream='+ match[1]+'&width=undefined&height=undefined&clip=' + match[1]
+	name=match[1];
 	print newURL
 
 	
@@ -327,25 +329,31 @@ def PlayLiveLink ( url ):
 #	response.close()
 		
 	
-	
+	if 1==1:
 #	print link
-	match =re.findall('MM_openBrWindow\(\'(.*)\',\'ebound\'', link,  re.IGNORECASE)
+		match =re.findall('MM_openBrWindow\(\'(.*)\',\'ebound\'', link,  re.IGNORECASE)
+			
+	#	print url
+	#	print match
 		
-#	print url
-#	print match
+		strval = match[0]
+		
+		#listitem = xbmcgui.ListItem(name)
+		#listitem.setInfo('video', {'Title': name, 'Genre': 'Live TV'})
+		#playlist = xbmc.PlayList( xbmc.PLAYLIST_VIDEO )
+		#playlist.clear()
+		#playlist.add (strval)
+		
+		#xbmc.Player().play(playlist)
+		listitem = xbmcgui.ListItem( label = str(name), iconImage = "DefaultVideo.png", thumbnailImage = xbmc.getInfoImage( "ListItem.Thumb" ), path=strval )
+		print "playing stream name: " + str(name) 
+		listitem.setInfo( type="video", infoLabels={ "Title": name, "Path" : strval } )
+		#listitem.setInfo( type="video", infoLabels={ "Title": name, "Plot" : name, "TVShowTitle": name } )
+		xbmc.Player( xbmc.PLAYER_CORE_DVDPLAYER ).play( str(strval), listitem)
 	
-	strval = match[0]
-	
-	listitem = xbmcgui.ListItem(name)
-	listitem.setInfo('video', {'Title': name, 'Genre': 'Live TV'})
-	playlist = xbmc.PlayList( xbmc.PLAYLIST_VIDEO )
-	playlist.clear()
-	playlist.add (strval)
-	
-	xbmc.Player().play(playlist)
 	return
 
-
+	
 #print "i am here"
 params=get_params()
 url=None

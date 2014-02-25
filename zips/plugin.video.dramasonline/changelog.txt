@@ -5,3 +5,5 @@
 - Some bug fixes and beta support for live channels
 [B]Version 1.5.0[/B]
 - Fixed some bugs about folder names and zip files
+[B]Version 1.6.0[/B]
+- Updated live channels, seems better now
