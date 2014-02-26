@@ -25,7 +25,7 @@ def addLink(name,url,iconimage):
 	return ok
 
 
-def addDir(name,url,mode,iconimage	,showContext=False):
+def addDir(name,url,mode,iconimage	,showContext=False, showLiveContext=False):
 #	print name
 #	name=name.decode('utf-8','replace')
 	h = HTMLParser.HTMLParser()
@@ -44,6 +44,12 @@ def addDir(name,url,mode,iconimage	,showContext=False):
 		cmd2 = "XBMC.RunPlugin(%s&linkType=%s)" % (u, "LINK")
 		cmd3 = "XBMC.RunPlugin(%s&linkType=%s)" % (u, "Youtube")
 		liz.addContextMenuItems([('Play Youtube video',cmd3),('Play DailyMotion video',cmd1),('Play Tune.pk video',cmd2)])
+	
+	if showLiveContext==True:
+		cmd1 = "XBMC.RunPlugin(%s&linkType=%s)" % (u, "RTMP")
+		cmd2 = "XBMC.RunPlugin(%s&linkType=%s)" % (u, "HTTP")
+		liz.addContextMenuItems([('Play RTMP Steam (flash)',cmd1),('Play Http Stream (ios)',cmd2)])
+	
 	ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
 	return ok
 	
@@ -82,7 +88,11 @@ def Addtypes():
 	addDir('Teleplays' ,'http://www.dramasonline.com/?cat=255' ,3,'')# these are is links
 	addDir('Top Rated Dramas' ,'http://www.dramasonline.com/' ,5,'') # top 
 	addDir('Live Channels' ,'http://www.dramasonline.com/category/live-channels/' ,6,'') ##
+	addDir('Settings' ,'http://www.dramasonline.com/category/live-channels/' ,8,'') ##
 	return
+
+def ShowSettings(Fromurl):
+	selfAddon.openSettings()
 
 def AddSeries(Fromurl):
 #	print Fromurl
@@ -216,7 +226,7 @@ def AddChannels(liveURL):
 	print match
 	h = HTMLParser.HTMLParser()
 	for cname in match:
-		addDir(cname[1] ,cname[0] ,7,cname[2])		#name,url,mode,icon
+		addDir(cname[1] ,cname[0] ,7,cname[2], False, True)		#name,url,mode,icon
 	return	
 	
 
@@ -301,13 +311,14 @@ def PlayLiveLink ( url ):
 	response.close()
 #	print link
 	print url
-	
+
 #	match =re.findall('<script id.+\s+src="(.*)">',link,  re.IGNORECASE)
 
 	match =re.findall('"http.*(ebound).*?\?site=(.*?)"',link,  re.IGNORECASE)[0]
 
 
 	print match
+	cName=match[1]
 	newURL='http://www.eboundservices.com/iframe/newads/iframe.php?stream='+ match[1]+'&width=undefined&height=undefined&clip=' + match[1]
 	name=match[1];
 	print newURL
@@ -327,10 +338,15 @@ def PlayLiveLink ( url ):
 #	response = urllib2.urlopen(req)
 #	link=response.read()
 #	response.close()
-		
-	
-	if 1==1:
+	time = 2000  #in miliseconds
+	defaultStreamType=0 #0 RTMP,1 HTTP
+	defaultStreamType=selfAddon.getSetting( "DefaultStreamType" ) 
+	print 'defaultStreamType',defaultStreamType
+	if linkType=="HTTP" or (linkType=="" and defaultStreamType=="1"):
 #	print link
+		line1 = "Playing Http Stream"
+		xbmc.executebuiltin('Notification(%s, %s, %d, %s)'%(__addonname__,line1, time, __icon__))
+		
 		match =re.findall('MM_openBrWindow\(\'(.*)\',\'ebound\'', link,  re.IGNORECASE)
 			
 	#	print url
@@ -350,6 +366,35 @@ def PlayLiveLink ( url ):
 		listitem.setInfo( type="video", infoLabels={ "Title": name, "Path" : strval } )
 		#listitem.setInfo( type="video", infoLabels={ "Title": name, "Plot" : name, "TVShowTitle": name } )
 		xbmc.Player( xbmc.PLAYER_CORE_DVDPLAYER ).play( str(strval), listitem)
+	else:
+		line1 = "Playing RTMP Stream"
+		xbmc.executebuiltin('Notification(%s, %s, %d, %s)'%(__addonname__,line1, time, __icon__))
+		
+		#print link
+		match =re.findall("m3u8.*?=(.*)[=]','e", link)
+
+		print url
+		print match
+
+		strval = match[0]
+
+		#listitem = xbmcgui.ListItem(name)
+		#listitem.setInfo('video', {'Title': name, 'Genre': 'Live TV'})
+		#playlist = xbmc.PlayList( xbmc.PLAYLIST_VIDEO )
+		#playlist.clear()
+		#playlist.add (strval)
+
+		playfile='rtmp://cdn.ebound.tv/tv?wmsAuthSign=/%s app=tv?wmsAuthSign=?%s swfurl=http://www.eboundservices.com/live/v6/player.swf?domain=&channel=%s&country=GB pageUrl=http://www.eboundservices.com/iframe/newads/iframe.php?stream=%s tcUrl=rtmp://cdn.ebound.tv/tv?wmsAuthSign=?%s live=true'	% (cName,strval,cName,cName,strval)
+		#playfile='rtmp://cdn.ebound.tv/tv?wmsAuthSign=/humtv app=tv?wmsAuthSign=?%s swfurl=http://www.eboundservices.com/live/v6/player.swf?domain=&channel=humtv&country=GB pageUrl=http://www.eboundservices.com/iframe/newads/iframe.php?stream=humtv tcUrl=rtmp://cdn.ebound.tv/tv?wmsAuthSign=?%s live=true'	% (strval,strval)
+
+		print playfile
+		#xbmc.Player().play(playlist)
+		listitem = xbmcgui.ListItem( label = str(name), iconImage = "DefaultVideo.png", thumbnailImage = xbmc.getInfoImage( "ListItem.Thumb" ) )
+		print "playing stream name: " + str(name) 
+		#listitem.setInfo( type="video", infoLabels={ "Title": name, "Path" : playfile } )
+		#listitem.setInfo( type="video", infoLabels={ "Title": name, "Plot" : name, "TVShowTitle": name } )
+		xbmc.Player( xbmc.PLAYER_CORE_AUTO ).play( playfile, listitem)
+	
 	
 	return
 
@@ -415,4 +460,7 @@ elif mode==6:
 elif mode==7:
 	print "Play url is "+url,mode
 	PlayLiveLink(url)
-	
+elif mode==8:
+	print "Play url is "+url,mode
+	ShowSettings(url)
+		
