@@ -2,10 +2,10 @@
 <addons>
 <addon id="plugin.video.dramasonline"
        name="DramasOnline.com"
-       version="2.0.0"
+       version="2.1.0"
        provider-name="shani">
   <requires>
-    <import addon="xbmc.python" version="2.0"/>
+    <import addon="xbmc.python" version="2.1.0"/>
     <import addon="script.module.beautifulsoup" version="3.0.8"/>
   </requires>
   <extension point="xbmc.python.pluginsource"
@@ -21,10 +21,10 @@
 
 <addon id="plugin.video.kannadaserial"
        name="KannadaSerial.tv"
-       version="1.0.0"
+       version="2.1.0"
        provider-name="shani">
   <requires>
-    <import addon="xbmc.python" version="2.0"/>
+    <import addon="xbmc.python" version="2.1.0"/>
     <import addon="script.module.beautifulsoup" version="3.0.8"/>
   </requires>
   <extension point="xbmc.python.pluginsource"
@@ -40,10 +40,10 @@
 
 <addon id="plugin.video.ZemTV-shani"
        name="ZemTV.com"
-       version="2.0.0"
+       version="2.1.0"
        provider-name="shani">
   <requires>
-    <import addon="xbmc.python" version="2.0"/>
+    <import addon="xbmc.python" version="2.1.0"/>
     <import addon="script.module.beautifulsoup" version="3.0.8"/>
   </requires>
   <extension point="xbmc.python.pluginsource"

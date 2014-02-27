@@ -21,7 +21,7 @@ def addLink(name,url,iconimage):
 	return ok
 
 
-def addDir(name,url,mode,iconimage	,showContext=False, showLiveContext=False):
+def addDir(name,url,mode,iconimage	,showContext=False, showLiveContext=False,isItFolder=True):
 #	print name
 #	name=name.decode('utf-8','replace')
 	h = HTMLParser.HTMLParser()
@@ -46,7 +46,7 @@ def addDir(name,url,mode,iconimage	,showContext=False, showLiveContext=False):
 		cmd2 = "XBMC.RunPlugin(%s&linkType=%s)" % (u, "HTTP")
 		liz.addContextMenuItems([('Play RTMP Steam (flash)',cmd1),('Play Http Stream (ios)',cmd2)])
 	
-	ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
+	ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=isItFolder)
 	return ok
 	
 
@@ -126,41 +126,6 @@ def AddSeries(Fromurl):
 	
 	return
 
-def TopRatedDramas(Fromurl):
-	#print Fromurl
-	req = urllib2.Request(Fromurl)
-	req.add_header('User-Agent','Mozilla/5.0(iPad; U; CPU iPhone OS 3_2 like Mac OS X; en-us) AppleWebKit/531.21.10 (KHTML, like Gecko) Version/4.0.4 Mobile/7B314 Safari/531.21.10')
-	response = urllib2.urlopen(req)
-	link=response.read()
-	response.close()
-#	print link
-#	print "addshows"
-#	match=re.compile('<param name="URL" value="(.+?)">').findall(link)
-#	match=re.compile('<a href="(.+?)"').findall(link)
-#	match=re.compile('onclick="playChannel\(\'(.*?)\'\);">(.*?)</a>').findall(link)
-#	match =re.findall('onclick="playChannel\(\'(.*?)\'\);">(.*?)</a>', link, re.DOTALL|re.IGNORECASE)
-#	match =re.findall('onclick="playChannel\(\'(.*?)\'\);".?>(.*?)</a>', link, re.DOTALL|re.IGNORECASE)
-#	match =re.findall('<div class=\"post-title\"><a href=\"(.*?)\".*<b>(.*)<\/b><\/a>', link, re.IGNORECASE)
-#	match =re.findall('<img src="(.*?)" alt=".*".+<\/a>\n*.+<div class="post-title"><a href="(.*?)".*<b>(.*)<\/b>', link, re.UNICODE)
-	regstring='<li><a href="(.*?)".*?>(.*?)<\/a><\/li>'
-	match =re.findall(regstring, link, re.M|re.DOTALL)
-	#match=re.compile('<a href="(.*?)"targe.*?<img.*?alt="(.*?)" src="(.*?)"').findall(link)
-#	print Fromurl
-
-#	print match
-	h = HTMLParser.HTMLParser()
-#	print 'match',match
-	for cname in match:
-		addDir(cname[1],cname[0] ,3,'')#url,name,jpg#name,url,mode,icon
-		
-#	<a href="http://www.zemtv.com/page/2/">&gt;</a></li>
-#	match =re.findall('<a href="(.*)">&gt;<\/a><\/li>', link, re.IGNORECASE)
-	
-#	if len(match)==1:
-#		addDir('Next Page' ,match[0] ,2,'')
-#       print match
-	
-	return
 
 def AddEnteries(Fromurl):
 #	print Fromurl
@@ -186,7 +151,7 @@ def AddEnteries(Fromurl):
 	h = HTMLParser.HTMLParser()
 
 	for cname in match:
-		addDir(cname[1] ,cname[0] ,4,'')
+		addDir(cname[1] ,cname[0] ,4,'',isItFolder=False)
 		
 #
 	
@@ -377,23 +342,25 @@ except:
 
 print 	mode
 
-if mode==None or url==None or len(url)<1:
-	print "InAddTypes"
-	Addtypes()
-	xbmcplugin.endOfDirectory(int(sys.argv[1]))
+try:
+	if mode==None or url==None or len(url)<1:
+		print "InAddTypes"
+		Addtypes()
 
-elif mode==2:
-	print "Ent url is "+name,url
-	AddSeries(url)
-	xbmcplugin.endOfDirectory(int(sys.argv[1]))
-	
-elif mode==3:
-	print "Ent url is "+url
-	AddEnteries(url)
-	xbmcplugin.endOfDirectory(int(sys.argv[1]))
+	elif mode==2:
+		print "Ent url is "+name,url
+		AddSeries(url)
 
-elif mode==4:
-	print "Play url is "+url
-	PlayShowLink(url)
+	elif mode==3:
+		print "Ent url is "+url
+		AddEnteries(url)
+
+	elif mode==4:
+		print "Play url is "+url
+		PlayShowLink(url)
+except:
+	print 'somethingwrong'
+xbmcplugin.endOfDirectory(int(sys.argv[1]))
+
 
 		

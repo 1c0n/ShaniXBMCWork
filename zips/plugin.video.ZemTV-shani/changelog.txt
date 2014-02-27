@@ -10,3 +10,6 @@
 - Implemented RTMP streaming now.
 - Option to select which steam to play as well as the default select
 
+[B]Version 2.1.0[/B]
+- Support for Gotham
+

@@ -28,7 +28,7 @@ def addLink(name,url,iconimage):
 	return ok
 
 
-def addDir(name,url,mode,iconimage,showContext=False,showLiveContext=False):
+def addDir(name,url,mode,iconimage,showContext=False,showLiveContext=False,isItFolder=True):
 #	print name
 	u=sys.argv[0]+"?url="+urllib.quote_plus(url)+"&mode="+str(mode)+"&name="+urllib.quote_plus(name)
 	ok=True
@@ -45,7 +45,7 @@ def addDir(name,url,mode,iconimage,showContext=False,showLiveContext=False):
 		cmd2 = "XBMC.RunPlugin(%s&linkType=%s)" % (u, "HTTP")
 		liz.addContextMenuItems([('Play RTMP Steam (flash)',cmd1),('Play Http Stream (ios)',cmd2)])
 	
-	ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
+	ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=isItFolder)
 	return ok
 	
 def PlayChannel ( channelName ): 
@@ -122,15 +122,13 @@ def DisplayChannelNames(url):
 	match=sorted(match,key=itemgetter(1)   )
 	for cname in match:
 		if cname[0]<>'':
-			addDir(cname[1] ,cname[0] ,1,'')
-		else:
-			addDir('Rex' ,'rex' ,1,'')
+			addDir(cname[1] ,cname[0] ,1,'',isItFolder=False)
 	return
 
 def Addtypes():
 	addDir('Shows' ,'Shows' ,2,'')
 	addDir('Live Channels' ,'Live' ,2,'')
-	addDir('Settings' ,'Live' ,6,'')
+	addDir('Settings' ,'Live' ,6,'',isItFolder=False)
 	return
 
 def AddEnteries(type):
@@ -168,13 +166,13 @@ def AddShows(Fromurl):
 	h = HTMLParser.HTMLParser()
 
 	for cname in match:
-		addDir(h.unescape(cname[2]) ,cname[1] ,3,cname[0], True)
+		addDir(h.unescape(cname[2]) ,cname[1] ,3,cname[0], True,isItFolder=False)
 		
 #	<a href="http://www.zemtv.com/page/2/">&gt;</a></li>
 	match =re.findall('<a href="(.*)">&gt;<\/a><\/li>', link, re.IGNORECASE)
 	
 	if len(match)==1:
-		addDir('Next Page' ,match[0] ,2,'')
+		addDir('Next Page' ,match[0] ,2,'',isItFolder=False)
 #       print match
 	
 	return
@@ -200,7 +198,7 @@ def AddChannels():
 #	print match
 	h = HTMLParser.HTMLParser()
 	for cname in match:
-		addDir(h.unescape(cname[2].replace("Watch Now Watch ","").replace("Live, High Quality Streaming","").replace("Live &#8211; High Quality Streaming","").replace("Watch Now ","")) ,cname[0] ,4,cname[1],False,True)		
+		addDir(h.unescape(cname[2].replace("Watch Now Watch ","").replace("Live, High Quality Streaming","").replace("Live &#8211; High Quality Streaming","").replace("Watch Now ","")) ,cname[0] ,4,cname[1],False,True,isItFolder=False)		
 	return	
 	
 
@@ -240,6 +238,7 @@ def PlayShowLink ( url ):
 		playlist.add(stream_url,listitem)
 		xbmcPlayer = xbmc.Player(xbmc.PLAYER_CORE_AUTO)
 	        xbmcPlayer.play(playlist)
+	        #xbmcplugin.setResolvedUrl(int(sys.argv[1]), True, listitem)
 #src="(.*?(dailymotion).*?)"
 	elif  linkType=="LINK"  or (linkType=="" and defaultLinkType=="2"):
 		line1 = "Playing Tune.pk Link"
@@ -260,7 +259,7 @@ def PlayShowLink ( url ):
 		playlist.add(stream_url,listitem)
 		xbmcPlayer = xbmc.Player(xbmc.PLAYER_CORE_AUTO)
 	        xbmcPlayer.play(playlist)
-
+		x#bmcplugin.setResolvedUrl(int(sys.argv[1]), True, listitem)
 #src="(.*?(tune\.pk).*?)"
 	else:	#either its default or nothing selected
 		line1 = "Playing Youtube Link"
@@ -337,14 +336,24 @@ def PlayLiveLink ( url ):
 		listitem = xbmcgui.ListItem( label = str(name), iconImage = "DefaultVideo.png", thumbnailImage = xbmc.getInfoImage( "ListItem.Thumb" ), path=strval )
 		print "playing stream name: " + str(name) 
 		listitem.setInfo( type="video", infoLabels={ "Title": name, "Path" : strval } )
-		#listitem.setInfo( type="video", infoLabels={ "Title": name, "Plot" : name, "TVShowTitle": name } )
-		xbmc.Player(  ).play( str(strval), listitem)
+		listitem.setInfo( type="video", infoLabels={ "Title": name, "Plot" : name, "TVShowTitle": name } )
+		xbmc.Player(PLAYER_CORE_AUTO).play( str(strval), listitem)
 	else:
 		line1 = "Playing RTMP Stream"
 		xbmc.executebuiltin('Notification(%s, %s, %d, %s)'%(__addonname__,line1, time, __icon__))
 		
-		#print link
-		match =re.findall("m3u8.*?=(.*)[=]','e", link)
+		post = {'username':'hash'}
+        	post = urllib.urlencode(post)
+		req = urllib2.Request('http://eboundservices.com/flashplayerhash/index.php')
+		req.add_header('User-Agent', 'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/33.0.1750.117 Safari/537.36')
+		response = urllib2.urlopen(req,post)
+		link=response.read()
+		response.close()
+		
+
+        
+		print link
+		match =re.findall("=(.*)", link)
 
 		print url
 		print match
@@ -367,6 +376,7 @@ def PlayLiveLink ( url ):
 		#listitem.setInfo( type="video", infoLabels={ "Title": name, "Path" : playfile } )
 		#listitem.setInfo( type="video", infoLabels={ "Title": name, "Plot" : name, "TVShowTitle": name } )
 		xbmc.Player( xbmc.PLAYER_CORE_AUTO ).play( playfile, listitem)
+		#xbmcplugin.setResolvedUrl(int(sys.argv[1]), True, listitem)
 	
 	
 	return
@@ -403,23 +413,25 @@ except:
 
 print 	linkType
 
-if mode==None or url==None or len(url)<1:
-	print "InAddTypes"
-	Addtypes()
-	xbmcplugin.endOfDirectory(int(sys.argv[1]))
+try:
+	if mode==None or url==None or len(url)<1:
+		print "InAddTypes"
+		Addtypes()
+	elif mode==2:
+		print "Ent url is "+name
+		AddEnteries(name)
 
-elif mode==2:
-	print "Ent url is "+name
-	AddEnteries(name)
-	xbmcplugin.endOfDirectory(int(sys.argv[1]))
+	elif mode==3:
+		print "Play url is "+url
+		PlayShowLink(url)
 
-elif mode==3:
-	print "Play url is "+url
-	PlayShowLink(url)
+	elif mode==4:
+		print "Play url is "+url
+		PlayLiveLink(url)
 
-elif mode==4:
-	print "Play url is "+url
-	PlayLiveLink(url)
-elif mode==6:
-	print "Play url is "+url
-	ShowSettings(url)
+	elif mode==6:
+		print "Play url is "+url
+		ShowSettings(url)
+except:
+	print 'somethingwrong'
+xbmcplugin.endOfDirectory(int(sys.argv[1]))
