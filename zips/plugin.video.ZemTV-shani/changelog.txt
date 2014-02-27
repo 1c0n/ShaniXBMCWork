@@ -6,3 +6,7 @@
 - Fixed some bugs about folder names and zip files and naming etc
 [B]Version 1.2.0[/B]
 - Updated live channels, seems better now
+[B]Version 2.0.0[/B]
+- Implemented RTMP streaming now.
+- Option to select which steam to play as well as the default select
+

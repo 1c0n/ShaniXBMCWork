@@ -17,6 +17,9 @@ liveURL='http://www.zemtv.com/live-pakistani-news-channels/'
 
 tabURL ='http://www.eboundservices.com:8888/users/rex/m_live.php?app=%s&stream=%s'
 
+def ShowSettings(Fromurl):
+	selfAddon.openSettings()
+	
 def addLink(name,url,iconimage):
 	ok=True
 	liz=xbmcgui.ListItem(name, iconImage="DefaultVideo.png", thumbnailImage=iconimage)
@@ -25,7 +28,7 @@ def addLink(name,url,iconimage):
 	return ok
 
 
-def addDir(name,url,mode,iconimage,showContext=False):
+def addDir(name,url,mode,iconimage,showContext=False,showLiveContext=False):
 #	print name
 	u=sys.argv[0]+"?url="+urllib.quote_plus(url)+"&mode="+str(mode)+"&name="+urllib.quote_plus(name)
 	ok=True
@@ -37,6 +40,11 @@ def addDir(name,url,mode,iconimage,showContext=False):
 		cmd2 = "XBMC.RunPlugin(%s&linkType=%s)" % (u, "LINK")
 		cmd3 = "XBMC.RunPlugin(%s&linkType=%s)" % (u, "Youtube")
 		liz.addContextMenuItems([('Play Youtube video',cmd3),('Play DailyMotion video',cmd1),('Play Tune.pk video',cmd2)])
+	if showLiveContext==True:
+		cmd1 = "XBMC.RunPlugin(%s&linkType=%s)" % (u, "RTMP")
+		cmd2 = "XBMC.RunPlugin(%s&linkType=%s)" % (u, "HTTP")
+		liz.addContextMenuItems([('Play RTMP Steam (flash)',cmd1),('Play Http Stream (ios)',cmd2)])
+	
 	ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=True)
 	return ok
 	
@@ -122,6 +130,7 @@ def DisplayChannelNames(url):
 def Addtypes():
 	addDir('Shows' ,'Shows' ,2,'')
 	addDir('Live Channels' ,'Live' ,2,'')
+	addDir('Settings' ,'Live' ,6,'')
 	return
 
 def AddEnteries(type):
@@ -191,7 +200,7 @@ def AddChannels():
 #	print match
 	h = HTMLParser.HTMLParser()
 	for cname in match:
-		addDir(h.unescape(cname[2].replace("Watch Now Watch ","").replace("Live, High Quality Streaming","").replace("Live &#8211; High Quality Streaming","").replace("Watch Now ","")) ,cname[0] ,4,cname[1])		
+		addDir(h.unescape(cname[2].replace("Watch Now Watch ","").replace("Live, High Quality Streaming","").replace("Live &#8211; High Quality Streaming","").replace("Watch Now ","")) ,cname[0] ,4,cname[1],False,True)		
 	return	
 	
 
@@ -275,16 +284,16 @@ def PlayLiveLink ( url ):
 	response.close()
 #	print link
 	print url
-	
+
 #	match =re.findall('<script id.+\s+src="(.*)">',link,  re.IGNORECASE)
 
-	match =re.findall('"htt.*?\?site=(.*?)"',link,  re.IGNORECASE)
+	match =re.findall('"http.*(ebound).*?\?site=(.*?)"',link,  re.IGNORECASE)[0]
 
 
 	print match
-	
-	newURL='http://www.eboundservices.com/iframe/newads/iframe.php?stream='+ match[0]+'&width=undefined&height=undefined&clip=' + match[0]
-	name=match[0];
+	cName=match[1]
+	newURL='http://www.eboundservices.com/iframe/newads/iframe.php?stream='+ match[1]+'&width=undefined&height=undefined&clip=' + match[1]
+	name=match[1];
 	print newURL
 
 	
@@ -302,29 +311,64 @@ def PlayLiveLink ( url ):
 #	response = urllib2.urlopen(req)
 #	link=response.read()
 #	response.close()
-		
-	
-	
+	time = 2000  #in miliseconds
+	defaultStreamType=0 #0 RTMP,1 HTTP
+	defaultStreamType=selfAddon.getSetting( "DefaultStreamType" ) 
+	print 'defaultStreamType',defaultStreamType
+	if linkType=="HTTP" or (linkType=="" and defaultStreamType=="1"):
 #	print link
-	match =re.findall('MM_openBrWindow\(\'(.*)\',\'ebound\'', link,  re.IGNORECASE)
+		line1 = "Playing Http Stream"
+		xbmc.executebuiltin('Notification(%s, %s, %d, %s)'%(__addonname__,line1, time, __icon__))
 		
-#	print url
-#	print match
-	
-	strval = match[0]
+		match =re.findall('MM_openBrWindow\(\'(.*)\',\'ebound\'', link,  re.IGNORECASE)
+			
+	#	print url
+	#	print match
+		
+		strval = match[0]
+		
+		#listitem = xbmcgui.ListItem(name)
+		#listitem.setInfo('video', {'Title': name, 'Genre': 'Live TV'})
+		#playlist = xbmc.PlayList( xbmc.PLAYLIST_VIDEO )
+		#playlist.clear()
+		#playlist.add (strval)
+		
+		#xbmc.Player().play(playlist)
+		listitem = xbmcgui.ListItem( label = str(name), iconImage = "DefaultVideo.png", thumbnailImage = xbmc.getInfoImage( "ListItem.Thumb" ), path=strval )
+		print "playing stream name: " + str(name) 
+		listitem.setInfo( type="video", infoLabels={ "Title": name, "Path" : strval } )
+		#listitem.setInfo( type="video", infoLabels={ "Title": name, "Plot" : name, "TVShowTitle": name } )
+		xbmc.Player(  ).play( str(strval), listitem)
+	else:
+		line1 = "Playing RTMP Stream"
+		xbmc.executebuiltin('Notification(%s, %s, %d, %s)'%(__addonname__,line1, time, __icon__))
+		
+		#print link
+		match =re.findall("m3u8.*?=(.*)[=]','e", link)
 
-	#listitem = xbmcgui.ListItem(name)
-	#listitem.setInfo('video', {'Title': name, 'Genre': 'Live TV'})
-	#playlist = xbmc.PlayList( xbmc.PLAYLIST_VIDEO )
-	#playlist.clear()
-	#playlist.add (strval)
+		print url
+		print match
+
+		strval = match[0]
+
+		#listitem = xbmcgui.ListItem(name)
+		#listitem.setInfo('video', {'Title': name, 'Genre': 'Live TV'})
+		#playlist = xbmc.PlayList( xbmc.PLAYLIST_VIDEO )
+		#playlist.clear()
+		#playlist.add (strval)
+
+		playfile='rtmp://cdn.ebound.tv/tv?wmsAuthSign=/%s app=tv?wmsAuthSign=?%s swfurl=http://www.eboundservices.com/live/v6/player.swf?domain=&channel=%s&country=GB pageUrl=http://www.eboundservices.com/iframe/newads/iframe.php?stream=%s tcUrl=rtmp://cdn.ebound.tv/tv?wmsAuthSign=?%s live=true'	% (cName,strval,cName,cName,strval)
+		#playfile='rtmp://cdn.ebound.tv/tv?wmsAuthSign=/humtv app=tv?wmsAuthSign=?%s swfurl=http://www.eboundservices.com/live/v6/player.swf?domain=&channel=humtv&country=GB pageUrl=http://www.eboundservices.com/iframe/newads/iframe.php?stream=humtv tcUrl=rtmp://cdn.ebound.tv/tv?wmsAuthSign=?%s live=true'	% (strval,strval)
+
+		print playfile
+		#xbmc.Player().play(playlist)
+		listitem = xbmcgui.ListItem( label = str(name), iconImage = "DefaultVideo.png", thumbnailImage = xbmc.getInfoImage( "ListItem.Thumb" ) )
+		print "playing stream name: " + str(name) 
+		#listitem.setInfo( type="video", infoLabels={ "Title": name, "Path" : playfile } )
+		#listitem.setInfo( type="video", infoLabels={ "Title": name, "Plot" : name, "TVShowTitle": name } )
+		xbmc.Player( xbmc.PLAYER_CORE_AUTO ).play( playfile, listitem)
 	
-	#xbmc.Player().play(playlist)
-	listitem = xbmcgui.ListItem( label = str(name), iconImage = "DefaultVideo.png", thumbnailImage = xbmc.getInfoImage( "ListItem.Thumb" ), path=strval )
-	print "playing stream name: " + str(name) 
-	listitem.setInfo( type="video", infoLabels={ "Title": name, "Path" : strval } )
-	#listitem.setInfo( type="video", infoLabels={ "Title": name, "Plot" : name, "TVShowTitle": name } )
-	xbmc.Player( xbmc.PLAYER_CORE_DVDPLAYER ).play( str(strval), listitem)
+	
 	return
 
 
@@ -376,4 +420,6 @@ elif mode==3:
 elif mode==4:
 	print "Play url is "+url
 	PlayLiveLink(url)
-
+elif mode==6:
+	print "Play url is "+url
+	ShowSettings(url)

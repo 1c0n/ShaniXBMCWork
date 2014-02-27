@@ -3,20 +3,16 @@ import urllib2,urllib,cgi, re, urlresolver
 import urlparse
 import HTMLParser
 import xbmcaddon
+import time
 from operator import itemgetter
 
 __addon__       = xbmcaddon.Addon()
 __addonname__   = __addon__.getAddonInfo('name')
 __icon__        = __addon__.getAddonInfo('icon')
-addon_id = 'plugin.video.dramasonline'
+addon_id = 'plugin.video.kannadaserial'
 selfAddon = xbmcaddon.Addon(id=addon_id)
   
  
-mainurl='http://www.dramasonline.com/'
-liveURL='http://www.zemtv.com/live-pakistani-news-channels/'
-
-tabURL ='http://www.eboundservices.com:8888/users/rex/m_live.php?app=%s&stream=%s'
-
 def addLink(name,url,iconimage):
 	ok=True
 	liz=xbmcgui.ListItem(name, iconImage="DefaultVideo.png", thumbnailImage=iconimage)
@@ -78,17 +74,15 @@ def get_params():
 
 def Addtypes():
 	#2 is series=3 are links
-	addDir('All Recent Episodes' ,'http://www.dramasonline.com/' ,3,'') #links 
-	addDir('HumTv Shows' ,'http://www.dramasonline.com/hum-tv-latest-dramas-episodes-online/' ,2,'')
-	addDir('GeoTv Shows' ,'http://www.dramasonline.com/geo-tv-latest-dramas-episodes-online/' ,2,'')
-	addDir('AryDigital Shows' ,'http://www.dramasonline.com/ary-digital-tv-latest-dramas-episodes-online/' ,2,'')
-	addDir('Hum Sitaray Shows' ,'http://www.dramasonline.com/hum-sitaray-latest-dramas-episodes-online/' ,2,'')
-	addDir('Express Shows' ,'http://www.dramasonline.com/express-entertainment-latest-dramas-episodes-online/' ,2,'')
-	addDir('APlus Shows' ,'http://www.dramasonline.com/aplus-entertainment-latest-dramas-episodes-online/' ,2,'')
-	addDir('Teleplays' ,'http://www.dramasonline.com/?cat=255' ,3,'')# these are is links
-	addDir('Top Rated Dramas' ,'http://www.dramasonline.com/' ,5,'') # top 
-	addDir('Live Channels' ,'http://www.dramasonline.com/category/live-channels/' ,6,'') ##
-	addDir('Settings' ,'http://www.dramasonline.com/category/live-channels/' ,8,'') ##
+	addDir('UDAYA TV' ,'http://kannadaserial.tv/tv/udaya-tv' ,2,'')
+	addDir('SUVARNA TV' ,'http://kannadaserial.tv/tv/suvarna-tv' ,2,'')
+	addDir('ZEE KANNADA' ,'http://kannadaserial.tv/tv/zee-kannada' ,2,'')
+	addDir('ETV KANNADA' ,'http://kannadaserial.tv/tv/etv-kannada' ,2,'')
+	#addDir('COMEDY' ,'http://kannadaserial.tv/tv/udaya-tv' ,2,'')
+	addDir('TV SHOWS' ,'http://kannadaserial.tv/tv/kannada-tv-shows' ,2,'')
+	addDir('RECIPES' ,'http://kannadaserial.tv/tv/kannada-recipes' ,2,'')
+	
+	
 	return
 
 def ShowSettings(Fromurl):
@@ -110,21 +104,18 @@ def AddSeries(Fromurl):
 #	match =re.findall('onclick="playChannel\(\'(.*?)\'\);".?>(.*?)</a>', link, re.DOTALL|re.IGNORECASE)
 #	match =re.findall('<div class=\"post-title\"><a href=\"(.*?)\".*<b>(.*)<\/b><\/a>', link, re.IGNORECASE)
 #	match =re.findall('<img src="(.*?)" alt=".*".+<\/a>\n*.+<div class="post-title"><a href="(.*?)".*<b>(.*)<\/b>', link, re.UNICODE)
-	regstring='<a title="(.*?)" href="(.*?)".*?img.*?src="(.*?)" wid'
-	optiontype=1
-	if 'ary-digital'  in Fromurl or  'aplus-ent'  in Fromurl: 
-		regstring='<a href="(.*?)"targe.*?<img.*?alt="(.*?)" src="(.*?)"'
-		optiontype=2
-	match =re.findall(regstring, link, re.M|re.DOTALL)
+	regstring='<img src="(.*?)".*\s*<div class="rml"><a href="(.*?)" >(.*?)<\/a><\/div>'
+	#optiontype=1
+	#if 'ary-digital'  in Fromurl or  'aplus-ent'  in Fromurl: 
+    #		regstring='<a href="(.*?)"targe.*?<img.*?alt="(.*?)" src="(.*?)"'
+	#	optiontype=2
+	match =re.findall(regstring, link)
 	#match=re.compile('<a href="(.*?)"targe.*?<img.*?alt="(.*?)" src="(.*?)"').findall(link)
-	#print Fromurl
+	print match
 
 
 	for cname in match:
-		if optiontype==2:
-			addDir(cname[1] ,cname[0] ,3,cname[2])#url,name,jpg#name,url,mode,icon
-		else:
-			addDir(cname[0] ,cname[1] ,3,cname[2])#name,url,img
+		addDir(cname[2] ,cname[1] ,3,'http://kannadaserial.tv'+cname[0])#url,name,jpg#name,url,mode,icon
 		
 #	<a href="http://www.zemtv.com/page/2/">&gt;</a></li>
 #	match =re.findall('<a href="(.*)">&gt;<\/a><\/li>', link, re.IGNORECASE)
@@ -188,21 +179,16 @@ def AddEnteries(Fromurl):
 #	match =re.findall('<div class=\"post-title\"><a href=\"(.*?)\".*<b>(.*)<\/b><\/a>', link, re.IGNORECASE)
 #	match =re.findall('<img src="(.*?)" alt=".*".+<\/a>\n*.+<div class="post-title"><a href="(.*?)".*<b>(.*)<\/b>', link, re.UNICODE)
 #	print Fromurl
-	match =re.findall('<div class="videopart">\s*<div class="paneleft">\s*<a class="pthumb" href="(.*?)" title="(.*?)".*?img.*?src="(.*?)" class="attachment-index-post-thumbnail wp-post-image"', link, re.M|re.DOTALL)
+	match =re.findall('<div class="episode" id=\'h3_(.*?)\' ><h4>(.*?)<\/h4><\/div>', link, re.M|re.DOTALL)
 #	print Fromurl
 
 	#print match
 	h = HTMLParser.HTMLParser()
 
 	for cname in match:
-		addDir(cname[1] ,cname[0] ,4,cname[2])
+		addDir(cname[1] ,cname[0] ,4,'')
 		
-#	<a href="http://www.zemtv.com/page/2/">&gt;</a></li>
-	match =re.findall('<link rel=\'next\' href=\'(.*?)\' \/>', link, re.IGNORECASE)
-	
-	if len(match)==1:
-		addDir('Next Page' ,match[0] ,3,'')
-#       print match
+#
 	
 	return
 	
@@ -232,72 +218,33 @@ def AddChannels(liveURL):
 
 def PlayShowLink ( url ): 
 #	url = tabURL.replace('%s',channelName);
+
+	
+	url='http://kannadaserial.tv/admin/AjaxProcess.php?cfile=load_video&id=%s&param=value&_=%s' % (url, time.time())
+	print url
 	req = urllib2.Request(url)
 	req.add_header('User-Agent', 'Mozilla/5.0(iPad; U; CPU iPhone OS 3_2 like Mac OS X; en-us) AppleWebKit/531.21.10 (KHTML, like Gecko) Version/4.0.4 Mobile/7B314 Safari/531.21.10')
 	response = urllib2.urlopen(req)
 	link=response.read()
 	response.close()
-#	print url
 
-	line1 = "Playing DM Link"
-	time = 5000  #in miliseconds
- 	defaultLinkType=0 #0 youtube,1 DM,2 tunepk
-	defaultLinkType=selfAddon.getSetting( "DefaultVideoType" ) 
-	#print defaultLinkType
-	#print "LT link is" + linkType
-	# if linktype is not provided then use the defaultLinkType
-	linkType="LINK"
-	if linkType=="DM" or (linkType=="" and defaultLinkType=="1"):
-		print "PlayDM"
-		line1 = "Playing DM Link"
-		xbmc.executebuiltin('Notification(%s, %s, %d, %s)'%(__addonname__,line1, time, __icon__))
-#		print link
-		playURL= match =re.findall('src="(.*?(dailymotion).*?)"',link)
-		playURL=match[0][0]
-		print playURL
-		playlist = xbmc.PlayList(1)
-		playlist.clear()
-		listitem = xbmcgui.ListItem(name, iconImage="DefaultVideo.png")
-		listitem.setInfo("Video", {"Title":name})
-		listitem.setProperty('mimetype', 'video/x-msvideo')
-		listitem.setProperty('IsPlayable', 'true')
-		stream_url = urlresolver.HostedMediaFile(playURL).resolve()
-		print stream_url
-		playlist.add(stream_url,listitem)
-		xbmcPlayer = xbmc.Player(xbmc.PLAYER_CORE_AUTO)
-	        xbmcPlayer.play(playlist)
-#src="(.*?(dailymotion).*?)"
-	elif  linkType=="LINK"  or (linkType=="" and defaultLinkType=="2"):
-		line1 = "Playing Tune.pk Link"
-		xbmc.executebuiltin('Notification(%s, %s, %d, %s)'%(__addonname__,line1, time, __icon__))
 
-		print "PlayLINK"
-		playURL= match =re.findall('<strong>Tune Full<\/strong>\s*.*?src="(.*?(tune\.pk).*?)"', link)
-		playURL=match[0][0]# check if not found then try other methods
-		print playURL
-		playlist = xbmc.PlayList(1)
-		playlist.clear()
-		listitem = xbmcgui.ListItem(name, iconImage="DefaultVideo.png")
-		listitem.setInfo("Video", {"Title":name})
-		listitem.setProperty('mimetype', 'video/x-msvideo')
-		listitem.setProperty('IsPlayable', 'true')
-		stream_url = urlresolver.HostedMediaFile(playURL).resolve()
-		print stream_url
-		playlist.add(stream_url,listitem)
-		xbmcPlayer = xbmc.Player(xbmc.PLAYER_CORE_AUTO)
-	        xbmcPlayer.play(playlist)
-
-#src="(.*?(tune\.pk).*?)"
-	else:	#either its default or nothing selected
-		line1 = "Playing Youtube Link"
-		xbmc.executebuiltin('Notification(%s, %s, %d, %s)'%(__addonname__,line1, time, __icon__))
-
-		youtubecode= match =re.findall('<strong>Youtube<\/strong>.*?src=\".*?embed\/(.*?)\?.*\".*?<\/iframe>', link,re.DOTALL| re.IGNORECASE)
-		youtubecode=youtubecode[0]
-		uurl = 'plugin://plugin.video.youtube/?action=play_video&videoid=%s' % youtubecode
-#	print uurl
-		xbmc.executebuiltin("xbmc.PlayMedia("+uurl+")")
+	match =re.findall('embed\/(.*?)\?', link)
 	
+	if len(match)==0:
+		print 'not found trying again'
+		match =re.findall('yt\(\'(.*?)\'', link)
+	print link,match
+	
+	time1=2000
+	line1 = "Playing Youtube Link"
+	xbmc.executebuiltin('Notification(%s, %s, %d, %s)'%(__addonname__,line1, time1, __icon__))
+
+	youtubecode=match[0]
+	uurl = 'plugin://plugin.video.youtube/?action=play_video&videoid=%s' % youtubecode
+#	print uurl
+	xbmc.executebuiltin("xbmc.PlayMedia("+uurl+")")
+
 	return
 	
 
@@ -449,18 +396,4 @@ elif mode==4:
 	print "Play url is "+url
 	PlayShowLink(url)
 
-elif mode==5:
-	print "TopRatedDramas url is "+url
-	TopRatedDramas(url)
-	xbmcplugin.endOfDirectory(int(sys.argv[1]))
-elif mode==6:
-	print "Play url is "+url
-	AddChannels(url)
-	xbmcplugin.endOfDirectory(int(sys.argv[1]))
-elif mode==7:
-	print "Play url is "+url,mode
-	PlayLiveLink(url)
-elif mode==8:
-	print "Play url is "+url,mode
-	ShowSettings(url)
 		
