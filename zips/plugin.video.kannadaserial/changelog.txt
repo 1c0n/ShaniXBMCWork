@@ -3,3 +3,6 @@
 
 [B]Version 2.1.0[/B]
 - Support for Gotham
+
+[B]Version 2.2.1[/B]
+- Fixed dependencie

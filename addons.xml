@@ -2,11 +2,12 @@
 <addons>
 <addon id="plugin.video.dramasonline"
        name="DramasOnline.com"
-       version="2.2.0"
+       version="2.2.1"
        provider-name="shani">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
-    <import addon="script.module.beautifulsoup" version="3.0.8"/>
+	<import addon="script.module.urlresolver" version="1.0.0"/>
+	<import addon="plugin.video.youtube" version="2.9.2"/>
   </requires>
   <extension point="xbmc.python.pluginsource"
             library="default.py">
@@ -21,11 +22,12 @@
 
 <addon id="plugin.video.kannadaserial"
        name="KannadaSerial.tv"
-       version="2.1.0"
+       version="2.1.1"
        provider-name="shani">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
-    <import addon="script.module.beautifulsoup" version="3.0.8"/>
+	<import addon="script.module.urlresolver" version="1.0.0"/>
+	<import addon="plugin.video.youtube" version="2.9.2"/>
   </requires>
   <extension point="xbmc.python.pluginsource"
             library="default.py">
@@ -40,11 +42,13 @@
 
 <addon id="plugin.video.ZemTV-shani"
        name="ZemTV.com"
-       version="2.2.0"
+       version="2.2.1"
        provider-name="shani">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
-    <import addon="script.module.beautifulsoup" version="3.0.8"/>
+	<import addon="script.module.urlresolver" version="1.0.0"/>
+	<import addon="plugin.video.youtube" version="2.9.2"/>
+
   </requires>
   <extension point="xbmc.python.pluginsource"
             library="default.py">

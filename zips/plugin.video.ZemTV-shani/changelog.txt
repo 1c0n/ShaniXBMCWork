@@ -16,3 +16,5 @@
 [B]Version 2.2.0[/B]
 - Reading streams from the source-eboundservices
 
+[B]Version 2.2.1[/B]
+- Fixed dependencie
