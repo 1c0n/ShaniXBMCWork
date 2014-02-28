@@ -1,0 +1,259 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+<title>Ebound Services, UAE </title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<meta http-equiv="Content-Style-Type" content="text/css" />
+<link href="http://www.eboundservices.com/style1.css" rel="stylesheet" type="text/css" />
+<link href="http://www.eboundservices.com/layout.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript">
+
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-25337038-1']);
+  _gaq.push(['_setDomainName', '.eboundservices.com']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+<meta name="description" content="Eboundservices provide IPTV, Internet TV, webtv, IP Camera, Hosted CCTV system and VOIP solutions." />
+<meta name="keywords" content="iptv, internet tv, IPCamera, IP Camera, voip, geotv, geo, aajtv, aaj news, dawn, webtv, dvr, pakistan, livestream, livetv, live wedding, live event, live coverage, dsng, tv coverage, footage" />
+<link rel="canonical" href="http://www.eboundservices.com/" />
+</head>
+<body id="page6">
+
+<div id="main-bg">
+  <div id="main">
+    <!-- header -->
+    <div id="header"> <a href="index.html"><img src="http://www.eboundservices.com/images/Logo_istream.gif" alt="" width="205" height="83" id="logo" /></a>
+      <ul id="menu">
+       <li><a href="http://www.eboundservices.com">Home</a></li>
+        <li><a href="http://www.eboundservices.com/index-1.html">Products</a></li>
+        <li><a href="http://www.eboundservices.com/index-2.html">Solutions</a></li>
+        <li><a href="http://www.eboundservices.com/index-3.html">Testimonial</a></li>
+		<li><a href="http://www.eboundservices.com/shop.html">Shop</a></li>
+        <li><a href="http://www.eboundservices.com/index-4.html"> Contact</a></li>
+      </ul>
+      </div>
+	<center>
+
+</center>
+    <!-- content -->
+	
+    <div id="content">
+      <div class="privacy">
+        <div class="wrapper">
+          <h2></h2>
+          <p><a href="http://www.eboundservices.com/istream_features.html">Features</a> &nbsp;&nbsp;&nbsp;&nbsp;<a href="http://www.eboundservices.com/istream_howitworks.html">How-it-Works</a> &nbsp;&nbsp;&nbsp;&nbsp;<a href="http://www.eboundservices.com/istream_demo.html">Demo</a> &nbsp;&nbsp;&nbsp;&nbsp;<a href="http://www.eboundservices.com/istream_pricing.html">Pricing/Packages</a> &nbsp;&nbsp;&nbsp;&nbsp;<a href="http://www.eboundservices.com/istream_FAQ.html">FAQ</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="http://www.eboundservices.com/signup_login.html">Signup/Login</a></p>
+          </p>
+		  
+		  <center>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Leaderboard -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-7041095355618538"
+     data-ad-slot="5269347808"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+		  </center>
+          <p align="center">Click on the logo to get stream</p>
+		  
+		  
+          <p align="center">
+		  <a href="channel.php?app=tv&stream=geonews"><img src="http://www.eboundservices.com/images/geo_news.jpg" alt="" width="144" height="144" border="0" /></a>
+		  <a href="channel.php?app=tv&stream=dawn"><img src="http://www.eboundservices.com/images/dawn_news.jpg" alt="" width="144" height="144" border="0" /></a>
+		  <a href="channel.php?app=tv&stream=aajnews"><img src="http://www.eboundservices.com/images/aajnews.jpg" alt="" width="144" height="144" /></a>
+		  <a href="channel.php?app=tv&stream=newsone"><img src="http://www.eboundservices.com/images/newsone.jpg" alt="" width="144" height="144" /></a>
+		  <a href="channel.php?app=tv&stream=suchtv"><img src="http://www.eboundservices.com/images/suchtv.jpg" alt="" width="144" height="144" /></a></p>
+          <p align="center">
+		  <a href="channel.php?app=tv&stream=nvibe"><img src="http://www.eboundservices.com/images/vibe.jpg" alt="" width="144" height="144" /></a>
+		  <a href="channel.php?app=tv&stream=metroone"><img src="http://www.eboundservices.com/images/metroone.jpg" alt="" width="144" height="144" border="0"/></a>
+		  <a href="channel.php?app=tv&stream=sohnidharti"><img src="http://www.eboundservices.com/images/sohnidharti.jpg" alt="" width="144" height="144" /></a>
+		  <a href="channel.php?app=tv&stream=arujtv"><img src="http://www.eboundservices.com/images/arujtv.JPG" alt="" width="144" height="144" /></a>
+		  <a href="channel.php?app=tv&stream=dinnews"><img src="http://www.eboundservices.com/images/dinnews.jpg" alt="" width="144" height="144" /></a></p>
+          <p align="center">
+		  <a href="channel.php?app=tv&stream=apna"><img src="http://www.eboundservices.com/images/apnatv.jpg" alt="" width="145" height="144" /></a>
+		  <a href="channel.php?app=tv&stream=sindhnews"><img src="http://www.eboundservices.com/images/Sindhnews.jpg" alt="" width="145" height="144" /></a>
+		  <a href="channel.php?app=tv&stream=waseb"><img src="http://www.eboundservices.com/images/waseb.jpg" alt="" width="144" height="144" /></a>
+		  <a href="channel.php?app=tv&stream=aplus"><img src="http://www.eboundservices.com/images/aplus.jpg" alt="" width="144" height="144" /></a>
+		  <a href="channel.php?app=tv&stream=apnanews"><img src="http://www.eboundservices.com/images/apnanews.jpg" alt="" width="144" height="144" /></a></p>
+          <p align="center">
+		  <a href="channel.php?app=tv&stream=8xm"><img src="http://www.eboundservices.com/images/8xm.jpg" alt="" width="144" height="144" /></a>
+		  <a href="channel.php?app=tv&stream=kook"><img src="http://www.eboundservices.com/images/kook.jpg" alt="" width="144" height="144" /></a>
+		  <a href="channel.php?app=tv&stream=atv"><img src="http://www.eboundservices.com/images/atv.jpg" alt="" width="144" height="144" /></a>
+		  <a href="channel.php?app=tv&stream=sindhtv"><img src="http://www.eboundservices.com/images/sindhtv.jpg" alt="" width="144" height="144" /></a>
+		  <a href="channel.php?app=tv&stream=royaltv"><img src="http://www.eboundservices.com/images/royal.jpg" alt="" width="144" height="144" /></a></p>
+
+          <p align="center">
+          <a href="channel.php?app=tv&stream=indusnews_sub"><img src="http://www.eboundservices.com/images/indusnews.jpg" alt="" width="144" height="144" /></a>
+          <a href="channel.php?app=tv&stream=indusvision_sub"><img src="http://www.eboundservices.com/images/indusvision.jpg" alt="" width="144" height="144" /></a>
+          <a href="channel.php?app=tv&stream=channelfive"><img src="http://www.eboundservices.com/images/channel5.jpg" alt="" width="144" height="144" /></a>
+          <a href="channel.php?app=tv&stream=punjabtv"><img src="http://www.eboundservices.com/images/punjabtv.jpg" alt="" width="144" height="144" /></a>
+          <a href="channel.php?app=tv&stream=starasia"><img src="http://www.eboundservices.com/images/starasia.jpg" alt="" width="144" height="144" /></a></p>
+          <p align="center">
+          <a href="channel.php?app=tv&stream=humtv"><img src="http://www.eboundservices.com/images/humtv.jpg" alt="" width="144" height="144" /></a>
+          <a href="channel.php?app=tv&stream=masalatv"><img src="http://www.eboundservices.com/images/masalatv.jpg" alt="" width="144" height="144" /></a>
+          <a href="channel.php?app=tv&stream=style360_sub"><img src="http://www.eboundservices.com/images/style360.jpg" alt="" width="144" height="144" /></a>
+		  <a href="channel.php?app=tv&stream=hum2"><img src="http://www.eboundservices.com/images/hum2.jpg" alt="" width="144" height="144" /></a>
+          <a href="channel.php?app=tv&stream=city42"><img src="http://www.eboundservices.com/images/city42.jpg" alt="" width="144" height="144" /></a>
+          <p align="center">       
+		  <a href="channel.php?app=tv&stream=ptvnews"><img src="http://www.eboundservices.com/images/ptvnews.jpg" alt="" width="144" height="144" /></a>
+		  <a href="channel.php?app=tv&stream=awaz"><img src="http://www.eboundservices.com/images/awaz.jpg" alt="" width="144" height="144" /></a>
+		  <a href="channel.php?app=tv&stream=healthtv"><img src="http://www.eboundservices.com/images/healthtv.jpg" alt="" width="144" height="144" /></a>          
+		  <a href="channel.php?app=tv&stream=waqtnews"><img src="http://www.eboundservices.com/images/waqtnews.jpg" alt="" width="144" height="144" /></a>          
+		  <a href="channel.php?app=tv&stream=watantv_sub"><img src="http://www.eboundservices.com/images/watantv.jpg" alt="" width="144" height="144" /></a>          		  
+		 <p align="center">       
+		  <a href="channel.php?app=tv&stream=payamtv"><img src="http://www.eboundservices.com/images/payamtv.jpg" alt="" width="144" height="144" /></a>
+		  <a href="channel.php?app=tv&stream=raahtv"><img src="http://www.eboundservices.com/images/raahtv.jpg" alt="" width="144" height="144" /></a>
+		  <a href="channel.php?app=tv&stream=dhoomtv"><img src="http://www.eboundservices.com/images/dhoomtv.jpg" alt="" width="144" height="144" /></a>
+		  <a href="channel.php?app=tv&stream=g1tv"><img src="http://www.eboundservices.com/images/g1tv.jpg" alt="" width="144" height="144" /></a>
+		  <a href="channel.php?app=tv&stream=emax"><img src="http://www.eboundservices.com/images/emax.jpg" alt="" width="144" height="144" /></a>		  
+		  <p align="center">       		  
+		  <a href="channel.php?app=tv&stream=avtkhyber"><img src="http://www.eboundservices.com/images/avtkhyber.jpg" alt="" width="144" height="144" /></a>
+		  <a href="channel.php?app=tv&stream=khybernews"><img src="http://www.eboundservices.com/images/khybernews.jpg" alt="" width="144" height="144" /></a>
+		  <a href="channel.php?app=tv&stream=k2tv"><img src="http://www.eboundservices.com/images/k2tv.jpg" alt="" width="144" height="144" /></a>
+		  <a href="channel.php?app=tv&stream=psb"><img src="http://www.eboundservices.com/images/psb.jpg" alt="" width="144" height="144" /></a>
+		  <a href="channel.php?app=tv&stream=playtv"><img src="http://www.eboundservices.com/images/playtv.jpg" alt="" width="144" height="144" /></a>
+ 		  <p align="center">       
+		  <img src="http://www.eboundservices.com/images/arynews.jpg" alt="" width="144" height="144" /></a>
+		  <img src="http://www.eboundservices.com/images/express.jpg" alt="" width="144" height="144" /></a>		  
+		  <a href="channel.php?app=tv&stream=rex"><img src="http://www.eboundservices.com/images/rextv.jpg" alt="" width="144" height="144" /></a>		  		  
+ 		  <a href="channel.php?app=tv&stream=sharq"><img src="http://www.eboundservices.com/images/sharqtv.png" alt="" width="144" height="144" /></a>		  		  
+
+
+		  <div id="aux">
+
+		  
+</div>
+</center>
+
+		  <center>
+<script async src="//pagead2.googlesyndication.com/pagead/js/adsbygoogle.js"></script>
+<!-- Leaderboard -->
+<ins class="adsbygoogle"
+     style="display:inline-block;width:728px;height:90px"
+     data-ad-client="ca-pub-7041095355618538"
+     data-ad-slot="5269347808"></ins>
+<script>
+(adsbygoogle = window.adsbygoogle || []).push({});
+</script>
+		  </center>
+		  <p>
+
+<DIV align="left">
+<b>
+This LIVE TV channel is provided to you in courtesy by EboundServices.Com Inc.  
+
+Watch all your favourite TV channel now on your PC, Mobile and TV through internet. Subscribe as low as $1 per channel/month. <br> <br>
+
+<u>EboundServices.COM TV partners with Pakistan TV & Networks to provide you the following services:</u><br><br>
+
+<li>&nbsp;&nbsp;&nbsp;&nbsp;EboundServices.COM TV is the only legal and largest distributor of Internet TV content of Pakistan. EboundServices.COM TV hosts its own streaming servers to provide you a better quality and reliable live TV & streaming services.</li> <br>
+
+<li>&nbsp;&nbsp;&nbsp;&nbsp;EboundServices.COM TV provides the VOIP phone service through its own phone switches and exchanges. EboundServices.COM TV is committed to serve you the best phone voice quality and best rates for international calling. </li><br>
+
+<li>&nbsp;&nbsp;&nbsp;&nbsp;EboundServices.COM TV hosts its own servers for CCTV Camera security monitoring. There is no comparision on the service quality, feature and rates. </li><br>
+
+<li>&nbsp;&nbsp;&nbsp;&nbsp;EboundServices.COM TV provides a hosted service for streaming live events. The streaming solution is unique and innovative. </li><br>
+
+<u>Additional Information: </u><br><br>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;http://www.eboundservices.com/android/faq.html </li><br>
+<li>&nbsp;&nbsp;&nbsp;&nbsp;http://www.eboundservices.com/android/about.html </li><br><br>
+</b>
+</DIV>
+<!--AdMedia-->
+<!-- google_ad_section_end -->
+    </center>
+    <!-- Begin Volusion Live Chat -->
+  </p>
+</blockquote>
+
+
+<table>
+<tr>
+<td width=25%>
+
+</td>
+<td width=50%>        
+<div align='center' id='VolusionLiveChat'><a href='http://www.volusion.com/livechat_software.asp'>Live Chat</a></div>
+<script defer type='text/javascript' src='https://livechat.volusion.com/script.aspx?id=424415' ></script>
+</td>
+
+</tr>
+</table>
+
+<!-- End Volusion Live Chat -->
+            <address>
+            </address>
+			
+          </div>
+        </div>
+      </div>
+    </div>
+	
+	
+    <!-- footer -->
+    <div id="footer-tail">
+      <div id="footer-bg">
+        <div id="footer">
+          <div class="inner">
+            <div class="wrapper">
+              <div class="block-1">
+                <h6>Support</h6>
+                <ul class="list-1">
+                  <li><a href="index-4.html">Contact us</a></li>
+                  <li><a href="index-4.html">e-Ticket</a></li>
+                  <li><a href="http://www.linkedin.com/e/-5ci6ts-gnoibi0q-24/vgh/3910681/eml-grp-sub/">LinkedIn</a></li>
+                  <li><a href="http://www.facebook.com/pages/Eboundservices/123133604432073?sk=info">FaceBook</a></li>
+                  <li class="extra"><a href="http://www.twitter.com/eboundservices">Twitter</a></li>
+                </ul>
+              </div>
+              <div class="block-2">
+                <h6>Solutions</h6>
+                <ul class="list-1">
+                  <li><a href="uplink.html">Live Uplink</a></li>
+                  <li><a href="webstream.html">Web Stream</a></li>
+                  <li><a href="ipbx.html">iPBX</a></li>
+                  <li></li>
+                  <li></li>
+                  <li></li>
+                  <li class="extra"></li>
+                </ul>
+              </div>
+              <div class="block-3">
+                <h6>Products</h6>
+                <ul class="list-1">
+                  <li><a href="istream.html">iStream</a></li>
+                  <li><a href="iCamera.html">iCamera </a></li>
+                  <li><a href="iVoIP.html">iVoIP</a></li>
+                  <li><a href="shop.html">Shop</a></li>
+                  <li></li>
+                  <li></li>
+                  <li class="extra"></li>
+                </ul>
+              </div>
+              <div class="block-4">
+                <h6><strong>Social Networks</strong></h6>
+                <ul id="icons">
+                  <li id="icon-1"><a href="http://www.facebook.com/Eboundservices"></a></li>
+                  <li id="icon-2"><a href="http://www.linkedin.com/e/-5ci6ts-gnoibi0q-24/vgh/3910681/eml-grp-sub/"></a></li>
+                  <li id="icon-3"><a href="http://www.youtube.com/user/eboundservices"></a></li>
+                  <li id="icon-4"><a href="http://www.twitter.com/eboundservices"></li>
+                  <p>&nbsp;</p>
+                </ul>
+                <h6><em>Copyright</em></h6>
+                <p>EboundServices &copy; 2010 | <a href="index-5.html">Privacy Policy</a></p>
+              </div>
+            </div>
+          </div>
+      
+
+</body>
+</html>

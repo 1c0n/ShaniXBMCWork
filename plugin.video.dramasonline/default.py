@@ -24,7 +24,20 @@ def addLink(name,url,iconimage):
 	ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=url,listitem=liz)
 	return ok
 
-
+def Colored(text = '', colorid = '', isBold = False):
+	if colorid == 'ZM':
+		color = 'FF11b500'
+	elif colorid == 'EB':
+		color = 'FFe37101'
+	elif colorid == 'bold':
+		return '[B]' + text + '[/B]'
+	else:
+		color = colorid
+		
+	if isBold == True:
+		text = '[B]' + text + '[/B]'
+	return '[COLOR ' + color + ']' + text + '[/COLOR]'	
+	
 def addDir(name,url,mode,iconimage	,showContext=False, showLiveContext=False,isItFolder=True):
 #	print name
 #	name=name.decode('utf-8','replace')
@@ -224,11 +237,60 @@ def AddChannels(liveURL):
 	match =re.findall('<div class="videopart">\s*<div class="paneleft">\s*<a.*href="(.*?)".*title="(.*?)".*<img.*src="(.*?)"', link,re.M)
 
 	print match
-	h = HTMLParser.HTMLParser()
+	#h = HTMLParser.HTMLParser()
 	for cname in match:
-		addDir(cname[1] ,cname[0] ,7,cname[2], False, True,isItFolder=False)		#name,url,mode,icon
+		addDir(Colored(cname[1],'ZM') ,cname[0] ,7,cname[2], False, True,isItFolder=False)		#name,url,mode,icon
+
 	return	
-	
+
+def AddChannelsFromEbound():
+	liveURL='http://eboundservices.com/istream_demo.php'
+	req = urllib2.Request(liveURL)
+	req.add_header('User-Agent','Mozilla/5.0(iPad; U; CPU iPhone OS 3_2 like Mac OS X; en-us) AppleWebKit/531.21.10 (KHTML, like Gecko) Version/4.0.4 Mobile/7B314 Safari/531.21.10')
+	response = urllib2.urlopen(req)
+	link=response.read()
+	response.close()
+#	print link
+#	match=re.compile('<param name="URL" value="(.+?)">').findall(link)
+#	match=re.compile('<a href="(.+?)"').findall(link)
+#	match=re.compile('onclick="playChannel\(\'(.*?)\'\);">(.*?)</a>').findall(link)
+#	match =re.findall('onclick="playChannel\(\'(.*?)\'\);">(.*?)</a>', link, re.DOTALL|re.IGNORECASE)
+#	match =re.findall('onclick="playChannel\(\'(.*?)\'\);".?>(.*?)</a>', link, re.DOTALL|re.IGNORECASE)
+#	match =re.findall('<div class=\"post-title\"><a href=\"(.*?)\".*<b>(.*)<\/b><\/a>', link, re.IGNORECASE)
+#	match =re.findall('<img src="(.*?)" alt=".*".+<\/a>\n*.+<div class="post-title"><a href="(.*?)".*<b>(.*)<\/b>', link, re.UNICODE)
+
+	match =re.findall('<a href=".*stream=(.*?)".*src="(.*?)"', link,re.M)
+
+	print match
+	expressExists=False
+	expressCName='express'
+
+	#h = HTMLParser.HTMLParser()
+	for cname in match:
+		addDir(Colored(cname[0].capitalize(),'EB') ,cname[0] ,9,cname[1], False, True,isItFolder=False)		#name,url,mode,icon
+		if cname[0]==expressCName:
+			expressExists=True
+			
+	if not expressExists:
+		addDir(Colored('Express Tv','EB') ,'express' ,9,'', False, True,isItFolder=False)		#name,url,mode,icon
+
+			
+	return		
+
+def Colored(text = '', colorid = '', isBold = False):
+	if colorid == 'ZM':
+		color = 'FF11b500'
+	elif colorid == 'EB':
+		color = 'FFe37101'
+	elif colorid == 'bold':
+		return '[B]' + text + '[/B]'
+	else:
+		color = colorid
+		
+	if isBold == True:
+		text = '[B]' + text + '[/B]'
+	return '[COLOR ' + color + ']' + text + '[/COLOR]'	
+
 
 def PlayShowLink ( url ): 
 #	url = tabURL.replace('%s',channelName);
@@ -303,24 +365,23 @@ def PlayShowLink ( url ):
 
 
 def PlayLiveLink ( url ): 
-#	url = tabURL.replace('%s',channelName);
-	req = urllib2.Request(url)
-	req.add_header('User-Agent', 'Mozilla/5.0(iPad; U; CPU iPhone OS 3_2 like Mac OS X; en-us) AppleWebKit/531.21.10 (KHTML, like Gecko) Version/4.0.4 Mobile/7B314 Safari/531.21.10')
-	response = urllib2.urlopen(req)
-	link=response.read()
-	response.close()
-#	print link
-	print url
-
-#	match =re.findall('<script id.+\s+src="(.*)">',link,  re.IGNORECASE)
-
-	match =re.findall('"http.*(ebound).*?\?site=(.*?)"',link,  re.IGNORECASE)[0]
 
 
-	print match
-	cName=match[1]
-	newURL='http://www.eboundservices.com/iframe/newads/iframe.php?stream='+ match[1]+'&width=undefined&height=undefined&clip=' + match[1]
-	name=match[1];
+	if mode==7:
+		req = urllib2.Request(url)
+		req.add_header('User-Agent', 'Mozilla/5.0(iPad; U; CPU iPhone OS 3_2 like Mac OS X; en-us) AppleWebKit/531.21.10 (KHTML, like Gecko) Version/4.0.4 Mobile/7B314 Safari/531.21.10')
+		response = urllib2.urlopen(req)
+		link=response.read()
+		response.close()
+		match =re.findall('"http.*(ebound).*?\?site=(.*?)"',link,  re.IGNORECASE)[0]
+		cName=match[1]
+	else:
+		cName=url
+	#match =re.findall('"http.*(ebound).*?\?site=(.*?)"',link,  re.IGNORECASE)[0]
+
+
+	
+	newURL='http://www.eboundservices.com/iframe/newads/iframe.php?stream='+ cName+'&width=undefined&height=undefined&clip=' + cName
 	print newURL
 
 	
@@ -342,7 +403,7 @@ def PlayLiveLink ( url ):
 	defaultStreamType=0 #0 RTMP,1 HTTP
 	defaultStreamType=selfAddon.getSetting( "DefaultStreamType" ) 
 	print 'defaultStreamType',defaultStreamType
-	if linkType=="HTTP" or (linkType=="" and defaultStreamType=="1"):
+	if 1==2 and (linkType=="HTTP" or (linkType=="" and defaultStreamType=="1")): #disable http streaming for time being
 #	print link
 		line1 = "Playing Http Stream"
 		xbmc.executebuiltin('Notification(%s, %s, %d, %s)'%(__addonname__,line1, time, __icon__))
@@ -361,10 +422,10 @@ def PlayLiveLink ( url ):
 		#playlist.add (strval)
 		
 		#xbmc.Player().play(playlist)
-		listitem = xbmcgui.ListItem( label = str(name), iconImage = "DefaultVideo.png", thumbnailImage = xbmc.getInfoImage( "ListItem.Thumb" ), path=strval )
-		print "playing stream name: " + str(name) 
-		listitem.setInfo( type="video", infoLabels={ "Title": name, "Path" : strval } )
-		listitem.setInfo( type="video", infoLabels={ "Title": name, "Plot" : name, "TVShowTitle": name } )
+		listitem = xbmcgui.ListItem( label = str(cName), iconImage = "DefaultVideo.png", thumbnailImage = xbmc.getInfoImage( "ListItem.Thumb" ), path=strval )
+		print "playing stream name: " + str(cName) 
+		listitem.setInfo( type="video", infoLabels={ "Title": cName, "Path" : strval } )
+		listitem.setInfo( type="video", infoLabels={ "Title": cName, "Plot" : cName, "TVShowTitle": cName } )
 		xbmc.Player(PLAYER_CORE_AUTO).play( str(strval), listitem)
 	else:
 		line1 = "Playing RTMP Stream"
@@ -405,8 +466,7 @@ def PlayLiveLink ( url ):
 		#listitem.setInfo( type="video", infoLabels={ "Title": name, "Plot" : name, "TVShowTitle": name } )
 		xbmc.Player( xbmc.PLAYER_CORE_AUTO ).play( playfile, listitem)
 		#xbmcplugin.setResolvedUrl(int(sys.argv[1]), True, listitem)
-	
-	
+
 	return
 
 	
@@ -463,8 +523,11 @@ try:
 		TopRatedDramas(url)
 	elif mode==6:
 		print "Play url is "+url
+		addDir(Colored('DramasOnline Channels','ZM',True) ,'ZEMTV' ,10,'', False, True,isItFolder=False)		#name,url,mode,icon
 		AddChannels(url)
-	elif mode==7:
+		addDir(Colored('EboundServices Channels','EB',True) ,'ZEMTV' ,10,'', False, True,isItFolder=False)		#name,url,mode,icon		
+		AddChannelsFromEbound()
+	elif mode==7 or mode==9:
 		print "Play url is "+url,mode
 		PlayLiveLink(url)
 	elif mode==8:
