@@ -1,0 +1,22 @@
+[B]Version 1.0[/B]
+- First version 1
+
+[B]Version 1.2[/B]
+- Some bug fixes and beta support for live channels
+[B]Version 1.5.0[/B]
+- Fixed some bugs about folder names and zip files
+[B]Version 1.6.0[/B]
+- Updated live channels, seems better now
+[B]Version 2.0.0[/B]
+- Implemented RTMP streaming now.
+- Option to select which steam to play as well as the default select
+
+[B]Version 2.1.0[/B]
+- Support for Gotham
+
+[B]Version 2.2.0[/B]
+- Reading streams from the source-eboundservices
+[B]Version 2.2.1[/B]
+- Fixed dependencies
+[B]Version 2.2.2[/B]
+- Progress bars etc while streaming
