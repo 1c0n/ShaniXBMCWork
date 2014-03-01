@@ -18,3 +18,5 @@
 
 [B]Version 2.2.1[/B]
 - Fixed dependencie
+[B]Version 2.2.2[/B]
+- Progress bars etc while streaming

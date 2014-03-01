@@ -365,7 +365,9 @@ def PlayShowLink ( url ):
 
 
 def PlayLiveLink ( url ): 
-
+	progress = xbmcgui.DialogProgress()
+	progress.create('Progress', 'Fetching Streaming Info')
+	progress.update( 10, "", "Finding links..", "" )
 
 	if mode==7:
 		req = urllib2.Request(url)
@@ -375,6 +377,8 @@ def PlayLiveLink ( url ):
 		response.close()
 		match =re.findall('"http.*(ebound).*?\?site=(.*?)"',link,  re.IGNORECASE)[0]
 		cName=match[1]
+		progress.update( 20, "", "Finding links..", "" )
+
 	else:
 		cName=url
 	#match =re.findall('"http.*(ebound).*?\?site=(.*?)"',link,  re.IGNORECASE)[0]
@@ -390,7 +394,8 @@ def PlayLiveLink ( url ):
 	response = urllib2.urlopen(req)
 	link=response.read()
 	response.close()
-	
+	progress.update( 50, "", "Finding links..", "" )
+
 	
 #	match =re.findall('<iframe.+src=\'(.*)\' frame',link,  re.IGNORECASE)
 #	print match
@@ -430,7 +435,8 @@ def PlayLiveLink ( url ):
 	else:
 		line1 = "Playing RTMP Stream"
 		xbmc.executebuiltin('Notification(%s, %s, %d, %s)'%(__addonname__,line1, time, __icon__))
-		
+		progress.update( 60, "", "Finding links..", "" )
+
 		post = {'username':'hash'}
         	post = urllib.urlencode(post)
 		req = urllib2.Request('http://eboundservices.com/flashplayerhash/index.php')
@@ -457,7 +463,7 @@ def PlayLiveLink ( url ):
 
 		playfile='rtmp://cdn.ebound.tv/tv?wmsAuthSign=/%s app=tv?wmsAuthSign=?%s swfurl=http://www.eboundservices.com/live/v6/player.swf?domain=&channel=%s&country=GB pageUrl=http://www.eboundservices.com/iframe/newads/iframe.php?stream=%s tcUrl=rtmp://cdn.ebound.tv/tv?wmsAuthSign=?%s live=true'	% (cName,strval,cName,cName,strval)
 		#playfile='rtmp://cdn.ebound.tv/tv?wmsAuthSign=/humtv app=tv?wmsAuthSign=?%s swfurl=http://www.eboundservices.com/live/v6/player.swf?domain=&channel=humtv&country=GB pageUrl=http://www.eboundservices.com/iframe/newads/iframe.php?stream=humtv tcUrl=rtmp://cdn.ebound.tv/tv?wmsAuthSign=?%s live=true'	% (strval,strval)
-
+		progress.update( 100, "", "Almost done..", "" )
 		print playfile
 		#xbmc.Player().play(playlist)
 		listitem = xbmcgui.ListItem( label = str(name), iconImage = "DefaultVideo.png", thumbnailImage = xbmc.getInfoImage( "ListItem.Thumb" ) )
