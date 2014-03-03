@@ -2,7 +2,7 @@
 <addons>
 <addon id="plugin.video.dramasonline"
        name="DramasOnline.com"
-       version="2.2.2"
+       version="2.2.3"
        provider-name="shani">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
@@ -22,7 +22,7 @@
 
 <addon id="plugin.video.kannadaserial"
        name="KannadaSerial.tv"
-       version="2.1.1"
+       version="2.2.3"
        provider-name="shani">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
@@ -40,9 +40,28 @@
   </extension>
 </addon>
 
+<addon id="plugin.video.shahidmbcnet"
+       name="ShahidMBC.net"
+       version="1.0.0"
+       provider-name="shani">
+  <requires>
+    <import addon="xbmc.python" version="2.1.0"/>
+
+  </requires>
+  <extension point="xbmc.python.pluginsource"
+            library="default.py">
+        <provides>video</provides>
+  </extension>
+  <extension point="xbmc.addon.metadata">
+    <summary>ShahidMBC.net XBMC Client</summary>
+    <description>Watch ShahidMBC.net on your XBMC. This plugin fetches the video sources from ShahidMBC.net and play on XBMC compatible plateforms</description>
+    <platform>all</platform>
+  </extension>
+</addon>
+
 <addon id="plugin.video.ZemTV-shani"
        name="ZemTV.com"
-       version="2.2.2"
+       version="2.2.3"
        provider-name="shani">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
