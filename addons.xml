@@ -42,7 +42,7 @@
 
 <addon id="plugin.video.shahidmbcnet"
        name="ShahidMBC.net"
-       version="1.0.0"
+       version="1.0.1"
        provider-name="shani">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
