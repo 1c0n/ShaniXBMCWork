@@ -1,4 +1,4 @@
 [B]Version 1.0[/B]
 - First version 1
-[B]Version 1.0.1[/B]
-- Fixed Logo
+[B]Version 1.2[/B]
+- Hard coded support for Proxy.
