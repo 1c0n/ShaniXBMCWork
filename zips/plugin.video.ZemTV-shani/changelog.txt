@@ -20,3 +20,5 @@
 - Fixed dependencie
 [B]Version 2.2.2[/B]
 - Progress bars etc while streaming
+[B]Version 2.2.3[/B]
+- house cleaning
