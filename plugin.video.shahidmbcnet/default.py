@@ -15,8 +15,6 @@ selfAddon = xbmcaddon.Addon(id=addon_id)
   
  
 mainurl='http://shahid.mbc.net'
-#mainurl='http://shahidmcb.url.ph'
-
 
 def getMainUrl():
 	rMain=mainurl
@@ -28,9 +26,7 @@ def getMainUrl():
 		if isProxyEnabled=="true":
 			#print 'its enabled'
 			rMain=proxyAddress
-		else:
-			print 'Proxy not enable'
-	rMain='http://shahidmcb.url.ph'# for time being just use proxy
+		#else: #print 'Proxy not enable'
 	return rMain
 	
 	
@@ -150,7 +146,7 @@ def AddSeries(Fromurl,pageNumber=""):
 	response = urllib2.urlopen(req)
 	link=response.read()
 	response.close()
-	print Fromurl
+	#print Fromurl
 #	print "addshows"
 #	match=re.compile('<param name="URL" value="(.+?)">').findall(link)
 #	match=re.compile('<a href="(.+?)"').findall(link)
