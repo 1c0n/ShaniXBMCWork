@@ -4,3 +4,5 @@
 - Hard coded support for Proxy.
 [B]Version 1.3[/B]
 - Settings for CDN and Proxy. Still harded coded proxy i used.
+[B]Version 1.4[/B]
+- Now, no more hard coded proxy.
