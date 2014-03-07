@@ -42,20 +42,21 @@
 
 <addon id="plugin.video.pitelevision"
        name="PiTelevision.com"
-       version="1.0.0"
+       version="1.1.0"
        provider-name="shani">
   <requires>
     <import addon="xbmc.python" version="2.1.0"/>
 	<import addon="script.module.urlresolver" version="1.0.0"/>
 	<import addon="plugin.video.youtube" version="2.9.2"/>
   </requires>
+
   <extension point="xbmc.python.pluginsource"
             library="default.py">
         <provides>video</provides>
   </extension>
   <extension point="xbmc.addon.metadata">
     <summary>pitelevision.com XBMC Client</summary>
-    <description>Watch dramasonline.com on your XBMC. This plugin fetches the video sources from pitelevision.com and play on XBMC compatible plateforms</description>
+    <description>Watch pitelevision.com on your XBMC. This plugin fetches the video sources from pitelevision.com and play on XBMC compatible plateforms</description>
     <platform>all</platform>
   </extension>
 </addon>

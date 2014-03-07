@@ -1,8 +1,0 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
-<settings>
-    <category label="32001">
-         <setting label="32018" type="enum" id="DefaultVideoType" values="Youtube Video|Dailymotion Video|Tune.pk Video"/>
-		 <setting label="32019" type="enum" id="DefaultStreamType" values="RTMP(Flash)|Http Live(ios)"/>
-		 
-     </category>
-</settings>
