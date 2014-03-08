@@ -31,7 +31,7 @@ class parseList(object):
             try:
                 isFolder=entry["isFolder"];
             except: pass
-            print name
+            #print name
             self.addDir(name, url,mode, paramList, iconimage, contextMenuList,isFolder)
         return
     
@@ -55,6 +55,6 @@ class parseList(object):
             for contextMenuList in contextMenuList:
                 commandList.append(( contextMenuList["name"], "XBMC.RunPlugin(%s&contextMenu=%s)" % (u, contextMenuList["value"]), ))
             liz.addContextMenuItems( commands )
-    	print name,url,parameterList,iconimage
+    	#print name,url,parameterList,iconimage
     	ok=xbmcplugin.addDirectoryItem(handle=int(sys.argv[1]),url=u,listitem=liz,isFolder=isFolder)
     	return ok

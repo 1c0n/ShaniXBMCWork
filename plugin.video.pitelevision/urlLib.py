@@ -29,7 +29,7 @@ class getURL():
         if not cookie is None:
             request.add_header('cookie', cookie)
         response = urllib2.urlopen(request, timeout=int(timeout))
-        print 'request',request
+        #print 'request',request
         if output == 'cookie':
             result = str(response.headers.get('Set-Cookie'))
         elif output == 'geturl':

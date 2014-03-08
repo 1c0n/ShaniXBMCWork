@@ -85,7 +85,7 @@ def getVODList(Fromurl,mode):
         else:
             modeToUse='VODEntry';
         #print modeToUse,cname[1]
-        listToReturn.append({'name':cname[1],'url':mainurl+cname[0],'mode':modeToUse,'iconimage':cname[2]})
+        listToReturn.append({'name':cname[1],'url':mainurl+cname[0],'mode':modeToUse,'iconimage':cname[2].replace(' ','%20')})
     return listToReturn;
 
 	
@@ -112,7 +112,7 @@ def getEnteriesList(Fromurl,PageNumber,mode):
         
         if not imageurl.startswith('http'): imageurl=mainurl+'/'+imageurl
         if not url.startswith('http'): url=mainurl+url
-        print imageurl    
+        #print imageurl    
         listToReturn.append({'name':cname[2],'url':url,'mode':rmode,'iconimage':imageurl,'isFolder':False})
 
     match =re.findall('<span class="pagenav">Next</span></li', link)
@@ -176,11 +176,11 @@ def getShowUrl(url):
     vidId=match[0][0]
     pid=match[0][1]
     url="http://www.pitelevision.com/index.php?option=com_allvideoshare&view=config&vid=%s&pid=%s&lang=en"%(vidId,pid)
-    print 'url',url
+    #print 'url',url
     link=getURL(url).result;
     #	print url
     match= re.findall('<video>(.*?)<', link)
-    print 'lowmatch', match
+    #print 'lowmatch', match
     lowLink=''
     if len(match)>0:
         lowLink=match[0]
@@ -209,7 +209,7 @@ def getLiveUrl(url):
     time=2000
     xbmc.executebuiltin('Notification(%s, %s, %d, %s)'%(__addonname__,line1, time, __icon__))
 
-    print 'fetching url',url
+    #print 'fetching url',url
     link=getURL(url).result;
     match= re.findall('flashvars="src=(.*?)\.f', link)
     #print 'match',match
@@ -308,7 +308,9 @@ if PageNumber==None: PageNumber=""
 
 print     mode,url
 
+		
 try:
+
     if mode==None or url==None or len(url)<1:
         print "InAddTypes"
         Addtypes()
@@ -334,12 +336,15 @@ try:
 except:
     print 'something wrong', sys.exc_info()[0]
     traceback.print_exc()
-    
+
 if (not mode==None) and mode>1:
     view_mode_id = get_view_mode_id('thumbnail')
     if view_mode_id is not None:
         print 'view_mode_id',view_mode_id
+        xbmcplugin.setContent(int(sys.argv[1]), 'movies')
+        print 'Container.SetViewMode(%d)' % view_mode_id
         xbmc.executebuiltin('Container.SetViewMode(%d)' % view_mode_id)
+    
 xbmcplugin.endOfDirectory(int(sys.argv[1]))
 
 

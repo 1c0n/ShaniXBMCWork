@@ -2,3 +2,5 @@
 - First version 1
 [B]Version 1.1.0[/B]
 - Working shows and Live tv
+[B]Version 1.1.1[/B]
+- Released..fixed some images issues
