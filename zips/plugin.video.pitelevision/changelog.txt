@@ -4,3 +4,5 @@
 - Working shows and Live tv
 [B]Version 1.1.1[/B]
 - Released..fixed some images issues
+[B]Version 1.1.2[/B]
+- RLibrary issue on android
